@@ -1,0 +1,120 @@
+{
+  "common": {
+    "brand": "Fruicroc",
+    "loading": "Chargement…",
+    "error": "Une erreur est survenue",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "add": "Ajouter",
+    "close": "Fermer",
+    "currency": "€"
+  },
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "orders": "Mes commandes",
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "language": "Langue"
+  },
+  "home": {
+    "title": "Fruits croustillants, naturels et savoureux",
+    "allCategories": "Toutes les catégories",
+    "noProducts": "Aucun produit disponible pour le moment",
+    "outOfStock": "Rupture de stock",
+    "addToCart": "Ajouter au panier"
+  },
+  "product": {
+    "ingredients": "Ingrédients",
+    "priceInclVat": "TTC",
+    "quantity": "Quantité"
+  },
+  "cart": {
+    "title": "Panier",
+    "empty": "Votre panier est vide",
+    "subtotal": "Sous-total",
+    "checkout": "Passer la commande",
+    "remove": "Retirer"
+  },
+  "checkout": {
+    "title": "Commande",
+    "contact": "Coordonnées",
+    "name": "Nom complet",
+    "phone": "Téléphone",
+    "email": "E-mail",
+    "shippingAddress": "Adresse de livraison",
+    "address": "Adresse",
+    "city": "Ville",
+    "postalCode": "Code postal",
+    "country": "Pays",
+    "selectCountry": "Choisir un pays",
+    "shipping": "Livraison",
+    "vat": "TVA ({rate}%)",
+    "total": "Total",
+    "payment": "Moyen de paiement",
+    "paypal": "PayPal",
+    "paypalSoon": "Bientôt disponible",
+    "bankTransfer": "Virement bancaire",
+    "bankTransferDesc": "Votre commande sera confirmée à réception du virement",
+    "placeOrder": "Confirmer la commande",
+    "notes": "Remarques (optionnel)",
+    "loginRequired": "Veuillez vous connecter pour commander"
+  },
+  "success": {
+    "title": "Merci pour votre commande !",
+    "orderNumber": "Commande n° {number}",
+    "bankInstructions": "Instructions de virement",
+    "bankIntro": "Veuillez effectuer le virement en indiquant la référence ci-dessous. Votre commande sera expédiée dès réception du paiement.",
+    "accountHolder": "Titulaire du compte",
+    "reference": "Référence à indiquer",
+    "backHome": "Retour à l'accueil"
+  },
+  "orders": {
+    "title": "Mes commandes",
+    "empty": "Aucune commande pour le moment",
+    "status": {
+      "pending_payment": "En attente de paiement",
+      "paid": "Payée",
+      "processing": "En préparation",
+      "shipped": "Expédiée",
+      "completed": "Terminée",
+      "cancelled": "Annulée"
+    }
+  },
+  "login": {
+    "title": "Connexion",
+    "email": "Adresse e-mail",
+    "sendLink": "Recevoir le lien de connexion",
+    "linkSent": "Lien envoyé ! Vérifiez votre boîte mail.",
+    "google": "Continuer avec Google"
+  },
+  "about": {
+    "title": "Bienvenue chez Fruicroc",
+    "paragraphs": [
+      "L'histoire de Fruicroc a commencé tout simplement… avec mes habitudes alimentaires. Je mange très peu durant la journée et mon alimentation dépend surtout de snacks sains. Pendant longtemps, j'achetais des fruits croustillants au Liban, mais ici, impossible de trouver le goût et la qualité que j'aimais.",
+      "Alors j'ai décidé de les préparer moi-même… à la maison, pour moi et pour ma fille ❤️",
+      "Le chemin n'a pas été facile. Il y a eu beaucoup d'essais, de fatigue et de défis. Mais je suis restée déterminée, jusqu'à arriver au résultat parfait : des fruits croustillants, naturels, savoureux et faits avec amour 🍓🥭🍎",
+      "Aujourd'hui, Fruicroc n'est pas seulement une marque… C'est une histoire de passion, de persévérance et d'amour pour les snacks sains.",
+      "Merci de faire partie de cette aventure 🌸"
+    ],
+    "signature": "Jana .K"
+  },
+  "legal": {
+    "mentions": "Mentions légales",
+    "cgv": "Conditions générales de vente",
+    "privacy": "Politique de confidentialité",
+    "withdrawal": "Droit de rétractation (14 jours)",
+    "placeholder": "Contenu en cours de rédaction — sera fourni avant la mise en ligne."
+  },
+  "cookies": {
+    "message": "Nous utilisons des cookies pour améliorer votre expérience. Vous pouvez accepter ou refuser les cookies non essentiels.",
+    "accept": "Tout accepter",
+    "reject": "Refuser",
+    "policy": "Politique de confidentialité"
+  },
+  "footer": {
+    "rights": "Tous droits réservés"
+  }
+}

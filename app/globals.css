@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Fruicroc — STRUCTURE ONLY.
+   Visual design system pending (Claude Design handoff).
+   Rules: logical-property utilities only (ms-, me-, ps-, pe-, text-start,
+   text-end), never left/right utilities — required for Arabic RTL.
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* Placeholder tokens — replaced by the design system later */
+  --bg: #ffffff;
+  --ink-900: #171717;
+  --ink-600: #525252;
+  --accent: #16a34a; /* temporary */
+  --danger: #dc2626;
+  --surface: #f5f5f5;
+  --border: #e5e5e5;
+}
+
+html[dir="rtl"] {
+  /* RTL comes free via logical properties; add overrides here only if needed */
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink-900);
+}

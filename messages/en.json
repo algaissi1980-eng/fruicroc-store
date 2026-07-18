@@ -1,0 +1,120 @@
+{
+  "common": {
+    "brand": "Fruicroc",
+    "loading": "Loading…",
+    "error": "Something went wrong",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "close": "Close",
+    "currency": "€"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About us",
+    "orders": "My orders",
+    "login": "Sign in",
+    "logout": "Sign out",
+    "language": "Language"
+  },
+  "home": {
+    "title": "Crunchy fruits — natural and delicious",
+    "allCategories": "All categories",
+    "noProducts": "No products available right now",
+    "outOfStock": "Out of stock",
+    "addToCart": "Add to cart"
+  },
+  "product": {
+    "ingredients": "Ingredients",
+    "priceInclVat": "incl. VAT",
+    "quantity": "Quantity"
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty",
+    "subtotal": "Subtotal",
+    "checkout": "Checkout",
+    "remove": "Remove"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "contact": "Contact details",
+    "name": "Full name",
+    "phone": "Phone",
+    "email": "Email",
+    "shippingAddress": "Shipping address",
+    "address": "Address",
+    "city": "City",
+    "postalCode": "Postal code",
+    "country": "Country",
+    "selectCountry": "Select a country",
+    "shipping": "Shipping",
+    "vat": "VAT ({rate}%)",
+    "total": "Total",
+    "payment": "Payment method",
+    "paypal": "PayPal",
+    "paypalSoon": "Coming soon",
+    "bankTransfer": "Bank transfer",
+    "bankTransferDesc": "Your order will be confirmed once the transfer is received",
+    "placeOrder": "Place order",
+    "notes": "Notes (optional)",
+    "loginRequired": "Please sign in to place an order"
+  },
+  "success": {
+    "title": "Thank you for your order!",
+    "orderNumber": "Order #{number}",
+    "bankInstructions": "Bank transfer instructions",
+    "bankIntro": "Please make the transfer using the reference below. Your order ships as soon as the payment arrives.",
+    "accountHolder": "Account holder",
+    "reference": "Payment reference",
+    "backHome": "Back to home"
+  },
+  "orders": {
+    "title": "My orders",
+    "empty": "No orders yet",
+    "status": {
+      "pending_payment": "Awaiting payment",
+      "paid": "Paid",
+      "processing": "Processing",
+      "shipped": "Shipped",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    }
+  },
+  "login": {
+    "title": "Sign in",
+    "email": "Email address",
+    "sendLink": "Send sign-in link",
+    "linkSent": "Link sent! Check your inbox.",
+    "google": "Continue with Google"
+  },
+  "about": {
+    "title": "Welcome to Fruicroc",
+    "paragraphs": [
+      "The story of Fruicroc began quite simply… with my eating habits. I eat very little during the day, and my diet relies mostly on healthy snacks. For a long time, I used to buy crunchy fruits in Lebanon, but here, I couldn't find the taste and quality I loved.",
+      "So I decided to make them myself… at home, for me and my daughter ❤️",
+      "The road wasn't easy. There were many trials, tiredness, and challenges. But I stayed determined until I reached the perfect result: crunchy fruits — natural, delicious, and made with love 🍓🥭🍎",
+      "Today, Fruicroc is not just a brand… It's a story of passion, perseverance, and love for healthy snacks.",
+      "Thank you for being part of this adventure 🌸"
+    ],
+    "signature": "Jana .K"
+  },
+  "legal": {
+    "mentions": "Legal notice",
+    "cgv": "Terms and conditions of sale",
+    "privacy": "Privacy policy",
+    "withdrawal": "Right of withdrawal (14 days)",
+    "placeholder": "Content being drafted — will be provided before launch."
+  },
+  "cookies": {
+    "message": "We use cookies to improve your experience. You can accept or reject non-essential cookies.",
+    "accept": "Accept all",
+    "reject": "Reject",
+    "policy": "Privacy policy"
+  },
+  "footer": {
+    "rights": "All rights reserved"
+  }
+}
