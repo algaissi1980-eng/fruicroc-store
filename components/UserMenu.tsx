@@ -49,12 +49,12 @@ export default function UserMenu() {
     router.refresh();
   };
 
-  // Signed out → sign-in link
+  // Signed out → sign-in link (desktop only; mobile uses the side drawer)
   if (!email) {
     return (
       <Link
         href="/login"
-        className="rounded-full bg-white px-3.5 py-2.5 text-[13px] font-bold text-[var(--body)] no-underline shadow-[0_1px_3px_rgba(58,36,32,.12)]"
+        className="hidden whitespace-nowrap rounded-full bg-white px-3.5 py-2.5 text-[13px] font-bold text-[var(--body)] no-underline shadow-[0_1px_3px_rgba(58,36,32,.12)] sm:block"
       >
         {t("login")}
       </Link>

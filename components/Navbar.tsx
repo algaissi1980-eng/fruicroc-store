@@ -23,7 +23,7 @@ export default function Navbar() {
 
   return (
     <header className="border-b border-[var(--border)] bg-[var(--surface)]">
-      <div className="flex items-center gap-4 px-4 py-3 lg:gap-7 lg:px-12 lg:py-4">
+      <div className="flex items-center gap-2 px-3 py-3 lg:gap-7 lg:px-12 lg:py-4">
         {/* Mobile hamburger */}
         <button
           type="button"
@@ -44,7 +44,7 @@ export default function Navbar() {
             priority
             className="h-10 w-10 rounded-full shadow-[0_1px_4px_rgba(58,36,32,.18)] lg:h-[52px] lg:w-[52px]"
           />
-          <span className="font-display text-[17px] font-extrabold leading-none text-[var(--primary)] lg:text-[22px]">
+          <span className="font-display whitespace-nowrap text-[16px] font-extrabold leading-none text-[var(--primary)] lg:text-[22px]">
             {tc("brandFirst")}{" "}
             <span className="text-[#E8A50C]">{tc("brandSecond")}</span>
           </span>
@@ -62,7 +62,7 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="ms-auto flex items-center gap-3 lg:ms-0">
+        <div className="ms-auto flex items-center gap-2 lg:ms-0 lg:gap-3">
           <LocaleSwitcher />
           <UserMenu />
           <CartButton />
@@ -119,6 +119,13 @@ export default function Navbar() {
               className="rounded-2xl px-4 py-3 text-[15px] font-semibold text-[var(--body)] no-underline hover:bg-[var(--surface-2)]"
             >
               {t("orders")}
+            </Link>
+            <Link
+              href="/login"
+              onClick={() => setOpen(false)}
+              className="rounded-2xl px-4 py-3 text-[15px] font-semibold text-[var(--body)] no-underline hover:bg-[var(--surface-2)]"
+            >
+              {t("login")}
             </Link>
           </nav>
         </div>

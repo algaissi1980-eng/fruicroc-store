@@ -31,7 +31,7 @@ export default function ProductCard({ product }: { product: Product }) {
         href={`/products/${slug || product.id}`}
         className="relative block aspect-square bg-white no-underline"
       >
-        {product.image_url && (
+        {product.image_url ? (
           <Image
             src={product.image_url}
             alt={name}
@@ -40,6 +40,10 @@ export default function ProductCard({ product }: { product: Product }) {
             loading="lazy"
             className="h-full w-full object-cover"
           />
+        ) : (
+          <span className="grid h-full w-full place-items-center bg-[var(--surface-2)] text-4xl">
+            🍓
+          </span>
         )}
         {out && (
           <span className="badge badge-pickup absolute top-3 start-3">
