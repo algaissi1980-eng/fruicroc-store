@@ -9,7 +9,7 @@ import CartButton from "./CartButton";
 import UserMenu from "./UserMenu";
 
 const NAV_LINKS = [
-  { key: "shop", href: "/" },
+  { key: "shop", href: "/#shop" },
   { key: "fruits", href: "/?category=fruits" },
   { key: "vegetables", href: "/?category=vegetables" },
   { key: "candy", href: "/?category=candy" },

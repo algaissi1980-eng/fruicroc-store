@@ -6,22 +6,30 @@ import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import ProductCard from "./ProductCard";
 import FloatingCart from "./FloatingCart";
-import type { Product } from "@/types";
+import type { Product, SiteImages } from "@/types";
 import { FROM_PRICE, formatPrice } from "@/lib/weights";
 import type { Locale } from "@/i18n/routing";
 
-// Temporary photos cropped from the brand's Instagram (design handoff) —
-// swap for client originals at the same aspect ratios.
-const CATEGORY_TILES = [
-  { key: "fruits", img: "/temp-products/peach.png" },
-  { key: "vegetables", img: "/temp-products/mushroom.png" },
-  { key: "candy", img: null }, // photo coming
-] as const;
-
-export default function HomeClient({ products }: { products: Product[] }) {
+export default function HomeClient({
+  products,
+  initialCategory = null,
+  siteImages = {},
+}: {
+  products: Product[];
+  initialCategory?: string | null;
+  siteImages?: SiteImages;
+}) {
   const locale = useLocale() as Locale;
   const t = useTranslations();
-  const [category, setCategory] = useState<string | null>(null);
+  const [category, setCategory] = useState<string | null>(initialCategory);
+
+  // Admin-uploaded images win; temp Instagram crops as fallback
+  const heroImg = siteImages.hero ?? "/temp-products/blackberry.png";
+  const categoryTiles = [
+    { key: "fruits", img: siteImages.category_fruits ?? "/temp-products/peach.png" },
+    { key: "vegetables", img: siteImages.category_vegetables ?? "/temp-products/mushroom.png" },
+    { key: "candy", img: siteImages.category_candy ?? null }, // photo coming
+  ] as const;
 
   const filtered = category
     ? products.filter((p) => p.category === category)
@@ -49,7 +57,7 @@ export default function HomeClient({ products }: { products: Product[] }) {
           <div className="relative w-full lg:hidden">
             <div className="overflow-hidden rounded-3xl shadow-[0_10px_26px_rgba(58,36,32,.16)]">
               <Image
-                src="/temp-products/blackberry.png"
+                src={heroImg}
                 alt=""
                 width={780}
                 height={460}
@@ -66,9 +74,10 @@ export default function HomeClient({ products }: { products: Product[] }) {
             {t("hero.subtitle")}
           </p>
           <div className="flex w-full flex-col gap-3.5 lg:w-auto lg:flex-row lg:items-center">
-            <Link href="/" className="btn-primary w-full text-[17px] no-underline lg:w-auto lg:px-8 lg:text-lg">
+            {/* Scrolls to the product grid */}
+            <a href="#shop" className="btn-primary w-full text-[17px] no-underline lg:w-auto lg:px-8 lg:text-lg">
               {t("hero.ctaShop")}
-            </Link>
+            </a>
             <Link href="/about" className="hidden rounded-full border-2 border-[#B9D3B0] px-5 py-3.5 text-base font-semibold text-[var(--success)] no-underline lg:inline-flex">
               {t("hero.ctaStory")}
             </Link>
@@ -93,7 +102,7 @@ export default function HomeClient({ products }: { products: Product[] }) {
         <div className="relative hidden justify-self-center lg:block">
           <div className="h-[430px] w-[430px] rounded-full bg-white p-3 shadow-[var(--shadow-ring)]">
             <Image
-              src="/temp-products/blackberry.png"
+              src={heroImg}
               alt=""
               width={430}
               height={430}
@@ -118,7 +127,7 @@ export default function HomeClient({ products }: { products: Product[] }) {
       <div className="scallop" style={{ "--scallop-top": "var(--surface)", "--scallop-bottom": "#fff" } as React.CSSProperties} />
 
       {/* ============ CATEGORIES + PRODUCTS ============ */}
-      <section className="bg-white px-5 pb-8 pt-6 lg:px-[72px] lg:pb-[52px] lg:pt-11">
+      <section id="shop" className="scroll-mt-4 bg-white px-5 pb-8 pt-6 lg:px-[72px] lg:pb-[52px] lg:pt-11">
         <div className="mb-4 flex flex-wrap items-baseline gap-3.5 lg:mb-6">
           <h2 className="m-0 text-[22px] font-extrabold text-[var(--ink)] lg:text-3xl">
             {t("home.categoriesTitle")}
@@ -129,7 +138,7 @@ export default function HomeClient({ products }: { products: Product[] }) {
         </div>
 
         <div className="flex gap-2.5 lg:grid lg:grid-cols-3 lg:gap-[22px]">
-          {CATEGORY_TILES.map((c) => (
+          {categoryTiles.map((c) => (
             <button
               key={c.key}
               type="button"
@@ -172,9 +181,13 @@ export default function HomeClient({ products }: { products: Product[] }) {
           <h2 className="m-0 text-[22px] font-extrabold text-[var(--ink)] lg:text-3xl">
             {t("home.favouritesTitle")}
           </h2>
-          <Link href="/" className="ms-auto text-[13px] font-semibold lg:text-[14.5px]">
+          <button
+            type="button"
+            onClick={() => setCategory(null)}
+            className="ms-auto cursor-pointer text-[13px] font-semibold text-[var(--primary)] lg:text-[14.5px]"
+          >
             {t("home.seeAll")}
-          </Link>
+          </button>
         </div>
 
         {filtered.length === 0 ? (
@@ -195,9 +208,19 @@ export default function HomeClient({ products }: { products: Product[] }) {
       {/* ============ STORY ============ */}
       <section className="grid items-center gap-6 bg-[var(--story-bg)] px-5 py-7 lg:grid-cols-[340px_1fr] lg:gap-12 lg:px-[72px] lg:py-[52px]">
         <div className="relative hidden lg:block">
-          <div className="grid h-[340px] w-[300px] place-items-center rounded-t-[150px] rounded-b-3xl bg-[#D8E6D2] p-5 text-center text-[13px] font-semibold text-[var(--success)]">
-            {t("story.photoPlaceholder")}
-          </div>
+          {siteImages.jana ? (
+            <Image
+              src={siteImages.jana}
+              alt="Jana"
+              width={300}
+              height={340}
+              className="h-[340px] w-[300px] rounded-t-[150px] rounded-b-3xl object-cover"
+            />
+          ) : (
+            <div className="grid h-[340px] w-[300px] place-items-center rounded-t-[150px] rounded-b-3xl bg-[#D8E6D2] p-5 text-center text-[13px] font-semibold text-[var(--success)]">
+              {t("story.photoPlaceholder")}
+            </div>
+          )}
           <span className="font-display absolute -bottom-2.5 -end-2.5 -rotate-[4deg] rounded-full bg-[var(--accent)] px-4 py-2.5 font-extrabold text-[var(--accent-ink)]">
             {t("story.sticker")}
           </span>

@@ -1,4 +1,7 @@
+import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { createClient } from "@/lib/supabase/server";
+import type { SiteImages } from "@/types";
 
 // Jana's letter — built on the design foundations (story-section language:
 // leaf green, arch photo, accent sticker). Dedicated design round pending.
@@ -13,14 +16,32 @@ export default async function AboutPage({
   const tStory = await getTranslations("story");
   const paragraphs = t.raw("paragraphs") as string[];
 
+  const supabase = await createClient();
+  const { data: settings } = await supabase
+    .from("store_settings")
+    .select("site_images")
+    .eq("id", 1)
+    .single();
+  const jana = (settings?.site_images as SiteImages | null)?.jana;
+
   return (
     <div className="bg-[var(--story-bg)]">
       <div className="mx-auto grid max-w-4xl items-start gap-8 px-5 py-10 lg:grid-cols-[300px_1fr] lg:gap-12 lg:py-16">
-        {/* Arch photo placeholder (awaiting Jana's real photo) */}
+        {/* Arch photo — editable from Admin → Settings */}
         <div className="relative mx-auto lg:mx-0">
-          <div className="grid h-[300px] w-[260px] place-items-center rounded-t-[130px] rounded-b-3xl bg-[#D8E6D2] p-5 text-center text-[13px] font-semibold text-[var(--success)] lg:h-[340px] lg:w-[300px] lg:rounded-t-[150px]">
-            {tStory("photoPlaceholder")}
-          </div>
+          {jana ? (
+            <Image
+              src={jana}
+              alt="Jana"
+              width={300}
+              height={340}
+              className="h-[300px] w-[260px] rounded-t-[130px] rounded-b-3xl object-cover lg:h-[340px] lg:w-[300px] lg:rounded-t-[150px]"
+            />
+          ) : (
+            <div className="grid h-[300px] w-[260px] place-items-center rounded-t-[130px] rounded-b-3xl bg-[#D8E6D2] p-5 text-center text-[13px] font-semibold text-[var(--success)] lg:h-[340px] lg:w-[300px] lg:rounded-t-[150px]">
+              {tStory("photoPlaceholder")}
+            </div>
+          )}
           <span className="font-display absolute -bottom-2.5 -end-2.5 -rotate-[4deg] rounded-full bg-[var(--accent)] px-4 py-2.5 font-extrabold text-[var(--accent-ink)] shadow-[0_4px_10px_rgba(58,36,32,.15)]">
             {tStory("sticker")}
           </span>

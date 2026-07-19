@@ -140,11 +140,21 @@ export interface CartStore {
   clearCart: () => void;
 }
 
+// 🟢 Site images — editable from Admin → Settings (migration 5)
+export interface SiteImages {
+  hero?: string;
+  category_fruits?: string;
+  category_vegetables?: string;
+  category_candy?: string;
+  jana?: string;
+}
+
 // 🟢 Store Settings
 export interface StoreSettings {
   id: number;
   categories: string[];
   announcement: LocalizedString | null;
+  site_images?: SiteImages | null;
   bank_account_holder?: string | null;
   bank_iban?: string | null;
   bank_bic?: string | null;
