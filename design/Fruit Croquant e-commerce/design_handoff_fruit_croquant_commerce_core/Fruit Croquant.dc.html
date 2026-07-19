@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;600;700;800&family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#EFE9DC;font-family:'Readex Pro',system-ui,sans-serif}
+a{color:#C42B2B}a:hover{color:#A31E1E}
+.dv-turn{padding:40px 44px 32px}
+.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}
+.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#3A2420;color:#fff;border-radius:4px;text-decoration:none}
+.dv-tname{font:600 13px/1.2 'Readex Pro',sans-serif;color:#3A2420}
+.dv-opts{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}
+.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}
+.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(58,36,32,.1);color:#3A2420;border-radius:5px;text-decoration:none}
+.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 'Readex Pro',sans-serif;color:rgba(58,36,32,.6)}
+.dv-card{max-width:100%;background:#fff;border:1px solid rgba(58,36,32,.1);border-radius:10px;box-shadow:0 2px 8px rgba(58,36,32,.08);overflow:hidden}
+.dv-opt:target .dv-oid{background:#C42B2B;color:#fff}
+</style>
+</helmet>
+
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">Fruit Croquant — commerce core · one direction: "épicerie chaleureuse" (cream canvas, cherry red, mango yellow, leaf green · Baloo Bhaijaan 2 + Readex Pro, both Arabic-native)</span></div>
+<div class="dv-opts">
+
+<!-- ============ 1a DESKTOP HOMEPAGE ============ -->
+<div class="dv-opt" id="1a">
+<div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Homepage — desktop 1440</div>
+<div class="dv-card" style="width:1440px;background:#FDF3E3;position:relative">
+  <div style="background:#C42B2B;color:#FFF3DC;text-align:center;padding:9px 24px;font-size:13.5px;font-weight:500;letter-spacing:.01em">Free delivery in France from €30 · Free across Europe from €100 — with a little gift inside 🎁</div>
+  <header style="display:flex;align-items:center;gap:28px;padding:16px 48px;background:#FDF3E3;border-bottom:1px solid #F0DFC2">
+    <div style="display:flex;align-items:center;gap:12px">
+      <img src="uploads/logo.png" alt="Fruit Croquant" style="width:52px;height:52px;border-radius:50%;box-shadow:0 1px 4px rgba(58,36,32,.18)">
+      <div style="font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:22px;line-height:1;color:#C42B2B">Fruit <span style="color:#E8A50C">Croquant</span></div>
+    </div>
+    <nav style="display:flex;gap:26px;margin-inline-start:auto;font-size:15px;font-weight:500;color:#5C3A2E">
+      <a href="#1b" style="color:#5C3A2E;text-decoration:none">Shop</a>
+      <a href="#1b" style="color:#5C3A2E;text-decoration:none">Fruits</a>
+      <a href="#1b" style="color:#5C3A2E;text-decoration:none">Vegetables</a>
+      <a href="#1b" style="color:#5C3A2E;text-decoration:none">Candy</a>
+      <a href="#1b" style="color:#5C3A2E;text-decoration:none">Our story</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="display:flex;background:#F7E7CC;border-radius:999px;padding:3px;font-size:12.5px;font-weight:600">
+        <span style="padding:5px 12px;border-radius:999px;color:#8A6248">FR</span>
+        <span style="padding:5px 12px;border-radius:999px;background:#fff;color:#C42B2B;box-shadow:0 1px 3px rgba(58,36,32,.15)">EN</span>
+        <span style="padding:5px 12px;border-radius:999px;color:#8A6248">AR</span>
+      </div>
+      <div style="position:relative;width:42px;height:42px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 1px 3px rgba(58,36,32,.12)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5C3A2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+        <span style="position:absolute;top:-4px;inset-inline-end:-4px;background:#C42B2B;color:#fff;font-size:10.5px;font-weight:700;min-width:18px;height:18px;border-radius:999px;display:grid;place-items:center">2</span>
+      </div>
+    </div>
+  </header>
+  <div style="display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding:56px 72px 64px">
+    <div style="display:flex;flex-direction:column;gap:22px;align-items:flex-start">
+      <div style="display:flex;gap:10px">
+        <span style="background:#E4EFDF;color:#3F7D4E;font-size:12.5px;font-weight:700;letter-spacing:.08em;padding:6px 14px;border-radius:999px">FREEZE-DRIED</span>
+        <span style="background:#FCE9C8;color:#B07508;font-size:12.5px;font-weight:700;letter-spacing:.08em;padding:6px 14px;border-radius:999px">100% NATURAL</span>
+      </div>
+      <h1 style="margin:0;font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:58px;line-height:1.08;color:#3A2420;text-wrap:pretty">Real fruit, <span style="color:#C42B2B">impossibly crunchy.</span></h1>
+      <p style="margin:0;font-size:18px;line-height:1.65;color:#6E4A38;max-width:46ch">Strawberries, mango, passion fruit and more — freeze-dried in France by Jana, keeping all the taste and vitamins of fresh fruit. Nothing added, ever.</p>
+      <div style="display:flex;gap:14px;align-items:center">
+        <span style="background:#C42B2B;color:#FFF6E8;font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:700;font-size:18px;padding:15px 32px;border-radius:999px;box-shadow:0 4px 14px rgba(196,43,43,.35);cursor:pointer">Shop the fruits</span>
+        <span style="color:#3F7D4E;font-weight:600;font-size:16px;padding:15px 20px;border-radius:999px;border:2px solid #B9D3B0;cursor:pointer">Meet Jana →</span>
+      </div>
+      <div style="display:flex;gap:22px;margin-top:6px;font-size:13.5px;font-weight:600;color:#7A5240;flex-wrap:wrap">
+        <span style="display:flex;align-items:center;gap:7px"><span style="width:22px;height:22px;border-radius:50%;background:#3F7D4E;color:#fff;display:grid;place-items:center;font-size:11px">☪</span>100% Halal</span>
+        <span style="display:flex;align-items:center;gap:7px"><span style="width:22px;height:22px;border-radius:50%;background:#E8A50C;color:#fff;display:grid;place-items:center;font-size:11px">✈</span>Ships to 10 EU countries</span>
+        <span style="display:flex;align-items:center;gap:7px"><span style="width:22px;height:22px;border-radius:50%;background:#5C3A2E;color:#fff;display:grid;place-items:center;font-size:11px">🔒</span>PayPal &amp; bank transfer</span>
+      </div>
+    </div>
+    <div style="position:relative;justify-self:center">
+      <div style="width:430px;height:430px;border-radius:50%;background:#fff;padding:12px;box-shadow:0 18px 44px rgba(58,36,32,.16)">
+        <img src="assets/blackberry.png" alt="Crunchy freeze-dried blackberries" style="width:100%;height:100%;object-fit:cover;border-radius:50%">
+      </div>
+      <div style="position:absolute;top:18px;inset-inline-end:-8px;background:#FFC53D;color:#7A4A00;font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:16px;padding:12px 18px;border-radius:999px;transform:rotate(8deg);box-shadow:0 4px 10px rgba(58,36,32,.15)">croc croc !</div>
+      <div style="position:absolute;bottom:26px;inset-inline-start:-14px;background:#fff;border-radius:16px;padding:12px 16px;box-shadow:0 8px 22px rgba(58,36,32,.14);display:flex;flex-direction:column;gap:2px">
+        <span style="font-size:12px;font-weight:600;color:#8A6248">Blackberries · 50 g</span>
+        <span style="font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:20px;color:#C42B2B">€7.00</span>
+      </div>
+    </div>
+  </div>
+  <div style="height:18px;background:radial-gradient(circle at 14px -5px, #FDF3E3 15px, transparent 16px) 0 0/34px 18px repeat-x, #fff"></div>
+  <div style="background:#fff;padding:44px 72px 52px">
+    <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:24px">
+      <h2 style="margin:0;font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:30px;color:#3A2420">Pick your crunch</h2>
+      <span style="font-size:14px;color:#9A7156">One price for every fruit — 30 g from €4.50</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px">
+      <div style="position:relative;border-radius:20px;overflow:hidden;height:210px;cursor:pointer">
+        <img src="assets/peach.png" alt="Fruits" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(58,36,32,.72))"></div>
+        <div style="position:absolute;bottom:16px;inset-inline-start:20px;color:#fff"><div style="font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:24px">Fruits</div><div style="font-size:13.5px;opacity:.85">13 varieties</div></div>
+      </div>
+      <div style="position:relative;border-radius:20px;overflow:hidden;height:210px;cursor:pointer">
+        <img src="assets/mushroom.png" alt="Vegetables" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(58,36,32,.72))"></div>
+        <div style="position:absolute;bottom:16px;inset-inline-start:20px;color:#fff"><div style="font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:24px">Vegetables</div><div style="font-size:13.5px;opacity:.85">Mushroom · okra</div></div>
+      </div>
+      <div style="position:relative;border-radius:20px;overflow:hidden;height:210px;cursor:pointer;background:#FFC53D">
+        <div style="position:absolute;inset:0;background:radial-gradient(circle at 20% 30%, #FFD76E 0 12%, transparent 13%), radial-gradient(circle at 70% 20%, #FFD76E 0 9%, transparent 10%), radial-gradient(circle at 45% 65%, #FFD76E 0 14%, transparent 15%), radial-gradient(circle at 85% 70%, #FFD76E 0 10%, transparent 11%)"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(122,74,0,.55))"></div>
+        <div style="position:absolute;top:14px;inset-inline-end:14px;background:#fff;color:#B07508;font-size:11.5px;font-weight:700;padding:5px 11px;border-radius:999px">PHOTO COMING</div>
+        <div style="position:absolute;bottom:16px;inset-inline-start:20px;color:#fff"><div style="font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:24px">Candy</div><div style="font-size:13.5px;opacity:.9">Marshmallow · Skittles</div></div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:baseline;gap:14px;margin:44px 0 24px">
+      <h2 style="margin:0;font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:30px;color:#3A2420">This week's favourites</h2>
+      <a href="#1c" style="margin-inline-start:auto;font-size:14.5px;font-weight:600">See all products →</a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:22px">
+      <sc-for list="{{ featured }}" as="p" hint-placeholder-count="4">
+        <div style="background:#FDF3E3;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;border:1px solid #F0DFC2">
+          <div style="position:relative;aspect-ratio:1;background:#fff">
+            <img src="{{ p.img }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:cover">
+            <sc-if value="{{ p.badge }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:12px;inset-inline-start:12px;background:#3F7D4E;color:#fff;font-size:11px;font-weight:700;letter-spacing:.04em;padding:5px 11px;border-radius:999px">{{ p.badge }}</span></sc-if>
+          </div>
+          <div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px">
+            <div style="font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:700;font-size:18.5px;color:#3A2420;line-height:1.2">{{ p.name }}</div>
+            <div style="font-size:13px;color:#9A7156">{{ p.note }}</div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <span style="font-size:11.5px;font-weight:600;color:#8A6248;background:#F7E7CC;padding:4px 9px;border-radius:8px">30g</span>
+              <span style="font-size:11.5px;font-weight:600;color:#8A6248;background:#F7E7CC;padding:4px 9px;border-radius:8px">50g</span>
+              <span style="font-size:11.5px;font-weight:600;color:#8A6248;background:#F7E7CC;padding:4px 9px;border-radius:8px">70g</span>
+              <span style="font-size:11.5px;font-weight:600;color:#8A6248;background:#F7E7CC;padding:4px 9px;border-radius:8px">100g</span>
+            </div>
+            <div style="display:flex;align-items:center;margin-top:4px">
+              <div style="font-size:13px;color:#8A6248">from <span style="font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:19px;color:#C42B2B">{{ fromPrice }}</span></div>
+              <span style="margin-inline-start:auto;width:38px;height:38px;border-radius:50%;background:#C42B2B;color:#fff;display:grid;place-items:center;font-size:20px;font-weight:600;cursor:pointer;box-shadow:0 3px 8px rgba(196,43,43,.3)">+</span>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  <div style="height:18px;background:radial-gradient(circle at 14px -5px, #fff 15px, transparent 16px) 0 0/34px 18px repeat-x, #EFF5EC"></div>
+  <div style="background:#EFF5EC;padding:52px 72px;display:grid;grid-template-columns:340px 1fr;gap:48px;align-items:center">
+    <div style="position:relative">
+      <div style="width:300px;height:340px;border-radius:150px 150px 24px 24px;background:#D8E6D2;display:grid;place-items:center;color:#3F7D4E;font-size:13px;font-weight:600;text-align:center;padding:20px">Photo of Jana<br>at the market stand</div>
+      <div style="position:absolute;bottom:-10px;inset-inline-end:-10px;background:#FFC53D;border-radius:999px;padding:10px 16px;font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;color:#7A4A00;transform:rotate(-4deg)">fait avec amour ♥</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px;align-items:flex-start">
+      <span style="font-size:12.5px;font-weight:700;letter-spacing:.1em;color:#3F7D4E">OUR STORY</span>
+      <h2 style="margin:0;font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:34px;line-height:1.15;color:#3A2420;text-wrap:pretty">"It started at home, for me and my daughter."</h2>
+      <p style="margin:0;font-size:16.5px;line-height:1.7;color:#5C4A38;max-width:62ch">In Lebanon, Jana grew up snacking on crunchy fruit — but in France she couldn't find them anywhere. So she learned to freeze-dry them herself. Many trials, a lot of patience, and one little brand later: Fruit Croquant. A story of passion, perseverance and a love of healthy snacks.</p>
+      <span style="background:#3F7D4E;color:#fff;font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:700;font-size:16px;padding:13px 26px;border-radius:999px;cursor:pointer">Read Jana's letter</span>
+    </div>
+  </div>
+  <div style="background:#FDF3E3;padding:44px 72px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;border-top:1px solid #F0DFC2">
+    <div>
+      <h3 style="margin:0 0 6px;font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:24px;color:#3A2420">A little crunch in your inbox</h3>
+      <p style="margin:0;font-size:14.5px;color:#8A6248">New fruits, restocks and market dates — once a month, no more.</p>
+    </div>
+    <div style="display:flex;gap:10px">
+      <input placeholder="Your email address" style="border:2px solid #EAD9BE;background:#fff;border-radius:999px;padding:13px 22px;font-size:15px;font-family:'Readex Pro',sans-serif;color:#3A2420;width:280px;outline:none">
+      <span style="background:#C42B2B;color:#FFF6E8;font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:700;font-size:16px;padding:13px 26px;border-radius:999px;cursor:pointer">Subscribe</span>
+    </div>
+  </div>
+  <footer style="background:#3A2420;color:#D9BFA8;padding:40px 72px;display:flex;gap:60px;font-size:13.5px;line-height:2">
+    <div style="max-width:260px">
+      <div style="font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:20px;color:#FFC53D;margin-bottom:8px">Fruit Croquant</div>
+      Freeze-dried fruits made with love in France. 100% Halal · no added sugar · no additives.
+    </div>
+    <div><b style="color:#fff">Shop</b><br>Fruits<br>Vegetables<br>Candy</div>
+    <div><b style="color:#fff">Help</b><br>Shipping &amp; delivery<br>Payment methods<br>Contact / WhatsApp</div>
+    <div><b style="color:#fff">Legal</b><br>Terms of sale<br>Privacy &amp; cookies<br>Mentions légales</div>
+    <div style="margin-inline-start:auto;text-align:end">Secure payment<br><span style="display:inline-flex;gap:8px;margin-top:6px"><span style="background:#fff;color:#25396B;font-weight:700;font-size:12px;padding:6px 12px;border-radius:8px">PayPal</span><span style="background:#fff;color:#3A2420;font-weight:700;font-size:12px;padding:6px 12px;border-radius:8px">IBAN transfer</span></span></footer>
+  <sc-if value="{{ showCookie }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;bottom:20px;inset-inline-start:50%;transform:translateX(-50%);width:720px;max-width:92%;background:#fff;border-radius:20px;box-shadow:0 12px 36px rgba(58,36,32,.25);padding:20px 24px;display:flex;gap:18px;align-items:center;border:1px solid #F0DFC2">
+      <img src="uploads/logo.png" alt="" style="width:44px;height:44px;border-radius:50%">
+      <div style="flex:1;font-size:13.5px;line-height:1.55;color:#5C3A2E"><b style="color:#3A2420">A cookie with your fruit?</b> We use a few cookies to keep your cart safe and understand what you love. Nothing sneaky — <a href="#1e">read our policy</a>.</div>
+      <div style="display:flex;gap:10px">
+        <span onClick="{{ dismissCookie }}" style="font-size:13.5px;font-weight:600;color:#8A6248;padding:11px 16px;cursor:pointer">Only essentials</span>
+        <span onClick="{{ dismissCookie }}" style="background:#3F7D4E;color:#fff;font-weight:700;font-size:13.5px;padding:11px 20px;border-radius:999px;cursor:pointer">Accept all</span>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</div>
+
+<!-- ============ 1b MOBILE HOMEPAGE ============ -->
+<div class="dv-opt" id="1b">
+<div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>Homepage — mobile 390</div>
+<div class="dv-card" style="width:390px;background:#FDF3E3">
+  <div style="background:#C42B2B;color:#FFF3DC;text-align:center;padding:8px 16px;font-size:12px;font-weight:500">Free delivery in France from €30 🎁</div>
+  <header style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid #F0DFC2">
+    <span style="width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:#F7E7CC;color:#5C3A2E;font-size:18px">☰</span>
+    <img src="uploads/logo.png" alt="" style="width:40px;height:40px;border-radius:50%">
+    <div style="font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:17px;color:#C42B2B">Fruit <span style="color:#E8A50C">Croquant</span></div>
+    <div style="margin-inline-start:auto;display:flex;gap:8px;align-items:center">
+      <span style="font-size:12px;font-weight:700;background:#fff;color:#C42B2B;padding:6px 10px;border-radius:999px;box-shadow:0 1px 3px rgba(58,36,32,.12)">EN ▾</span>
+      <span style="position:relative;width:44px;height:44px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 1px 3px rgba(58,36,32,.12)">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#5C3A2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+        <span style="position:absolute;top:-3px;inset-inline-end:-3px;background:#C42B2B;color:#fff;font-size:10px;font-weight:700;min-width:17px;height:17px;border-radius:999px;display:grid;place-items:center">2</span>
+      </span>
+    </div>
+  </header>
+  <div style="padding:26px 20px 30px;display:flex;flex-direction:column;gap:16px;align-items:flex-start">
+    <span style="background:#E4EFDF;color:#3F7D4E;font-size:11.5px;font-weight:700;letter-spacing:.08em;padding:5px 12px;border-radius:999px">FREEZE-DRIED · 100% NATURAL</span>
+    <h1 style="margin:0;font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:34px;line-height:1.12;color:#3A2420;text-wrap:pretty">Real fruit, <span style="color:#C42B2B">impossibly crunchy.</span></h1>
+    <div style="position:relative;width:100%">
+      <div style="border-radius:24px;overflow:hidden;box-shadow:0 10px 26px rgba(58,36,32,.16)"><img src="assets/blackberry.png" alt="" style="width:100%;height:230px;object-fit:cover;display:block"></div>
+      <div style="position:absolute;top:12px;inset-inline-end:12px;background:#FFC53D;color:#7A4A00;font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:13.5px;padding:8px 13px;border-radius:999px;transform:rotate(7deg)">croc croc !</div>
+    </div>
+    <p style="margin:0;font-size:14.5px;line-height:1.65;color:#6E4A38">Freeze-dried in France by Jana — all the taste and vitamins, nothing added.</p>
+    <span style="background:#C42B2B;color:#FFF6E8;font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:700;font-size:17px;padding:15px 0;border-radius:999px;box-shadow:0 4px 14px rgba(196,43,43,.35);width:100%;text-align:center;cursor:pointer">Shop the fruits</span>
+    <div style="display:flex;gap:14px;font-size:12px;font-weight:600;color:#7A5240;flex-wrap:wrap">
+      <span>☪ 100% Halal</span><span>✈ 10 EU countries</span><span>🔒 PayPal &amp; IBAN</span>
+    </div>
+  </div>
+  <div style="height:16px;background:radial-gradient(circle at 12px -4px, #FDF3E3 13px, transparent 14px) 0 0/30px 16px repeat-x, #fff"></div>
+  <div style="background:#fff;padding:24px 20px 30px">
+    <h2 style="margin:0 0 16px;font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:22px;color:#3A2420">Pick your crunch</h2>
+    <div style="display:flex;gap:10px;overflow:hidden">
+      <div style="position:relative;border-radius:16px;overflow:hidden;height:110px;flex:1"><img src="assets/peach.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"><div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(58,36,32,.7))"></div><div style="position:absolute;bottom:9px;inset-inline-start:12px;color:#fff;font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:700;font-size:15px">Fruits</div></div>
+      <div style="position:relative;border-radius:16px;overflow:hidden;height:110px;flex:1"><img src="assets/mushroom.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"><div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(58,36,32,.7))"></div><div style="position:absolute;bottom:9px;inset-inline-start:12px;color:#fff;font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:700;font-size:15px">Vegetables</div></div>
+      <div style="position:relative;border-radius:16px;overflow:hidden;height:110px;flex:1;background:#FFC53D"><div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(122,74,0,.5))"></div><div style="position:absolute;bottom:9px;inset-inline-start:12px;color:#fff;font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:700;font-size:15px">Candy</div></div>
+    </div>
+    <div style="display:flex;align-items:baseline;margin:26px 0 14px"><h2 style="margin:0;font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:22px;color:#3A2420">Favourites</h2><a href="#1c" style="margin-inline-start:auto;font-size:13px;font-weight:600">See all →</a></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <sc-for list="{{ featured }}" as="p" hint-placeholder-count="4">
+        <div style="background:#FDF3E3;border-radius:16px;overflow:hidden;border:1px solid #F0DFC2">
+          <div style="aspect-ratio:1;background:#fff"><img src="{{ p.img }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:cover"></div>
+          <div style="padding:11px 12px 13px;display:flex;flex-direction:column;gap:5px">
+            <div style="font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:700;font-size:14.5px;color:#3A2420;line-height:1.2">{{ p.name }}</div>
+            <div style="display:flex;align-items:center"><span style="font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:15.5px;color:#C42B2B">{{ fromPrice }}</span><span style="margin-inline-start:auto;width:32px;height:32px;border-radius:50%;background:#C42B2B;color:#fff;display:grid;place-items:center;font-size:17px;cursor:pointer">+</span></div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  <div style="background:#EFF5EC;padding:26px 20px;display:flex;flex-direction:column;gap:10px">
+    <span style="font-size:11.5px;font-weight:700;letter-spacing:.1em;color:#3F7D4E">OUR STORY</span>
+    <div style="font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:20px;line-height:1.25;color:#3A2420">"It started at home, for me and my daughter."</div>
+    <span style="background:#3F7D4E;color:#fff;font-weight:700;font-size:14px;padding:12px 22px;border-radius:999px;align-self:flex-start;cursor:pointer">Read Jana's letter</span>
+  </div>
+  <footer style="background:#3A2420;color:#D9BFA8;padding:22px 20px;font-size:12px;line-height:1.9">
+    <div style="font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:16px;color:#FFC53D">Fruit Croquant</div>
+    Made with love in France · 100% Halal<br>PayPal &amp; IBAN transfer · Ships to 10 EU countries
+  </footer>
+</div>
+</div>
+
+<!-- ============ 1c PRODUCT DETAIL ============ -->
+<div class="dv-opt" id="1c">
+<div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>Product detail — mobile 390 · live weight/price selector (tap the weights)</div>
+<div class="dv-card" style="width:390px;background:#fff">
+  <header style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:#FDF3E3;border-bottom:1px solid #F0DFC2">
+    <span style="width:44px;height:44px;border-radius:50%;background:#fff;display:grid;place-items:center;color:#5C3A2E;font-size:17px;box-shadow:0 1px 3px rgba(58,36,32,.12);cursor:pointer">←</span>
+    <div style="font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:700;font-size:15px;color:#3A2420">Fruits</div>
+    <span style="position:relative;margin-inline-start:auto;width:44px;height:44px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 1px 3px rgba(58,36,32,.12)">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#5C3A2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+      <span style="position:absolute;top:-3px;inset-inline-end:-3px;background:#C42B2B;color:#fff;font-size:10px;font-weight:700;min-width:17px;height:17px;border-radius:999px;display:grid;place-items:center">2</span>
+    </span>
+  </header>
+  <div style="background:#FDF3E3;padding:18px 20px 22px">
+    <div style="border-radius:22px;overflow:hidden;box-shadow:0 8px 24px rgba(58,36,32,.14)"><img src="assets/passionfruit.png" alt="Passion fruit cubes" style="width:100%;height:280px;object-fit:cover;display:block"></div>
+    <div style="display:flex;gap:10px;margin-top:12px">
+      <div style="width:64px;height:64px;border-radius:14px;overflow:hidden;border:3px solid #C42B2B"><img src="assets/passionfruit.png" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+      <div style="width:64px;height:64px;border-radius:14px;overflow:hidden;border:3px solid transparent;opacity:.75"><img src="assets/blackberry.png" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+      <div style="width:64px;height:64px;border-radius:14px;overflow:hidden;border:3px solid transparent;opacity:.75"><img src="assets/peach.png" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+    </div>
+  </div>
+  <div style="padding:22px 20px 26px;display:flex;flex-direction:column;gap:14px">
+    <div style="display:flex;gap:8px">
+      <span style="background:#E4EFDF;color:#3F7D4E;font-size:11px;font-weight:700;padding:5px 11px;border-radius:999px">100% HALAL</span>
+      <span style="background:#FCE9C8;color:#B07508;font-size:11px;font-weight:700;padding:5px 11px;border-radius:999px">NO ADDED SUGAR</span>
+    </div>
+    <div>
+      <h1 style="margin:0 0 4px;font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:27px;color:#3A2420">Passion Fruit Cubes</h1>
+      <p style="margin:0;font-size:14px;line-height:1.65;color:#6E4A38">Tangy, honeyed, seriously crunchy. Whole passion fruit, freeze-dried into golden cubes — eat them straight or crumble over yogurt.</p>
+    </div>
+    <div>
+      <div style="display:flex;align-items:baseline;margin-bottom:9px"><span style="font-size:13px;font-weight:700;color:#5C3A2E">Choose your size</span><span style="margin-inline-start:auto;font-size:12px;color:#9A7156">{{ perBag }}</span></div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+        <sc-for list="{{ weights }}" as="w" hint-placeholder-count="4">
+          <div onClick="{{ w.onPick }}" style="border:2px solid {{ w.bd }};background:{{ w.bg }};color:{{ w.fg }};border-radius:14px;padding:10px 4px 8px;text-align:center;cursor:pointer;display:flex;flex-direction:column;gap:1px">
+            <span style="font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:16px">{{ w.label }}</span>
+            <span style="font-size:11.5px;font-weight:600;opacity:.85">{{ w.price }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div onClick="{{ addToCart }}" style="background:{{ ctaBg }};color:#FFF6E8;font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:700;font-size:18px;padding:16px 0;border-radius:999px;text-align:center;cursor:pointer;box-shadow:0 5px 16px rgba(196,43,43,.32);display:flex;justify-content:center;gap:10px"><span>{{ ctaLabel }}</span><span style="opacity:.85">·</span><span>{{ detailPrice }}</span></div>
+    <div style="text-align:center;font-size:12px;color:#8A6248">Free delivery in France from €30 · Europe from €100 🎁</div>
+    <div style="border-top:1px solid #F0DFC2;padding-top:14px;display:flex;flex-direction:column;gap:12px;font-size:14px;color:#5C3A2E">
+      <div style="display:flex;font-weight:600"><span>Ingredients</span><span style="margin-inline-start:auto;color:#9A7156;font-weight:400">100% passion fruit</span></div>
+      <div style="display:flex;font-weight:600"><span>Shelf life</span><span style="margin-inline-start:auto;color:#9A7156;font-weight:400">12+ months sealed</span></div>
+      <div style="display:flex;font-weight:600"><span>Shipping</span><span style="margin-inline-start:auto;color:#9A7156;font-weight:400">France + 10 EU countries</span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============ 1d RTL PROOF ============ -->
+<div class="dv-opt" id="1d">
+<div class="dv-olabel"><a class="dv-oid" href="#1d">1d</a>Mirroring proof — same hero + product card in French (LTR) and Arabic (RTL)</div>
+<div style="display:flex;gap:20px;align-items:flex-start">
+  <div class="dv-card" style="width:390px;background:#FDF3E3" dir="ltr">
+    <div style="background:#C42B2B;color:#FFF3DC;text-align:center;padding:8px 16px;font-size:12px;font-weight:500">Livraison gratuite en France dès 30 € 🎁</div>
+    <header style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid #F0DFC2">
+      <img src="uploads/logo.png" alt="" style="width:40px;height:40px;border-radius:50%">
+      <div style="font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:17px;color:#C42B2B">Fruit <span style="color:#E8A50C">Croquant</span></div>
+      <span style="margin-inline-start:auto;font-size:12px;font-weight:700;background:#fff;color:#C42B2B;padding:6px 10px;border-radius:999px;box-shadow:0 1px 3px rgba(58,36,32,.12)">FR ▾</span>
+    </header>
+    <div style="padding:24px 20px;display:flex;flex-direction:column;gap:14px;align-items:flex-start">
+      <span style="background:#E4EFDF;color:#3F7D4E;font-size:11.5px;font-weight:700;letter-spacing:.06em;padding:5px 12px;border-radius:999px">LYOPHILISÉ · 100% NATUREL</span>
+      <h1 style="margin:0;font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:31px;line-height:1.14;color:#3A2420;text-wrap:pretty">Des vrais fruits, <span style="color:#C42B2B">incroyablement croquants.</span></h1>
+      <p style="margin:0;font-size:14px;line-height:1.65;color:#6E4A38">Lyophilisés en France par Jana — tout le goût et les vitamines, rien d'ajouté.</p>
+      <span style="background:#C42B2B;color:#FFF6E8;font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:700;font-size:16px;padding:14px 0;border-radius:999px;width:100%;text-align:center;box-shadow:0 4px 14px rgba(196,43,43,.35);cursor:pointer">Découvrir la boutique</span>
+      <div style="display:flex;gap:12px;font-size:11.5px;font-weight:600;color:#7A5240;flex-wrap:wrap"><span>☪ 100% Halal</span><span>✈ 10 pays d'Europe</span><span>🔒 Paiement sécurisé</span></div>
+      <div style="background:#fff;border:1px solid #F0DFC2;border-radius:18px;overflow:hidden;width:100%;display:grid;grid-template-columns:130px 1fr">
+        <img src="assets/blackberry.png" alt="" style="width:100%;height:100%;object-fit:cover">
+        <div style="padding:13px 15px;display:flex;flex-direction:column;gap:6px">
+          <div style="font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:700;font-size:16px;color:#3A2420">Mûres croquantes</div>
+          <div style="display:flex;gap:5px;flex-wrap:wrap"><span style="font-size:11px;font-weight:600;color:#8A6248;background:#F7E7CC;padding:3px 8px;border-radius:7px">30g</span><span style="font-size:11px;font-weight:700;color:#fff;background:#C42B2B;padding:3px 8px;border-radius:7px">50g</span><span style="font-size:11px;font-weight:600;color:#8A6248;background:#F7E7CC;padding:3px 8px;border-radius:7px">70g</span><span style="font-size:11px;font-weight:600;color:#8A6248;background:#F7E7CC;padding:3px 8px;border-radius:7px">100g</span></div>
+          <div style="display:flex;align-items:center;margin-top:2px"><span style="font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:18px;color:#C42B2B">7,00 €</span><span style="margin-inline-start:auto;background:#C42B2B;color:#fff;font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:999px;cursor:pointer">Ajouter</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dv-card" style="width:390px;background:#FDF3E3" dir="rtl">
+    <div style="background:#C42B2B;color:#FFF3DC;text-align:center;padding:8px 16px;font-size:12.5px;font-weight:500">توصيل مجاني في فرنسا من 30€ 🎁</div>
+    <header style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid #F0DFC2">
+      <img src="uploads/logo.png" alt="" style="width:40px;height:40px;border-radius:50%">
+      <div style="font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:17px;color:#C42B2B">فروت <span style="color:#E8A50C">كروكان</span></div>
+      <span style="margin-inline-start:auto;font-size:12px;font-weight:700;background:#fff;color:#C42B2B;padding:6px 10px;border-radius:999px;box-shadow:0 1px 3px rgba(58,36,32,.12)">AR ▾</span>
+    </header>
+    <div style="padding:24px 20px;display:flex;flex-direction:column;gap:14px;align-items:flex-start">
+      <span style="background:#E4EFDF;color:#3F7D4E;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px">مجفَّف بالتجميد · طبيعي 100%</span>
+      <h1 style="margin:0;font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:31px;line-height:1.3;color:#3A2420;text-wrap:pretty">فواكه حقيقية، <span style="color:#C42B2B">مقرمشة بشكل لا يُصدَّق.</span></h1>
+      <p style="margin:0;font-size:14.5px;line-height:1.8;color:#6E4A38">مجفَّفة بالتجميد في فرنسا على يد جنى — كل الطعم والفيتامينات، من دون أي إضافات.</p>
+      <span style="background:#C42B2B;color:#FFF6E8;font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:700;font-size:16px;padding:14px 0;border-radius:999px;width:100%;text-align:center;box-shadow:0 4px 14px rgba(196,43,43,.35);cursor:pointer">تسوَّق الآن</span>
+      <div style="display:flex;gap:12px;font-size:12px;font-weight:600;color:#7A5240;flex-wrap:wrap"><span>☪ حلال 100%</span><span>✈ 10 دول أوروبية</span><span>🔒 دفع آمن</span></div>
+      <div style="background:#fff;border:1px solid #F0DFC2;border-radius:18px;overflow:hidden;width:100%;display:grid;grid-template-columns:130px 1fr">
+        <img src="assets/blackberry.png" alt="" style="width:100%;height:100%;object-fit:cover">
+        <div style="padding:13px 15px;display:flex;flex-direction:column;gap:6px">
+          <div style="font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:700;font-size:16px;color:#3A2420">توت أسود مقرمش</div>
+          <div style="display:flex;gap:5px;flex-wrap:wrap"><span style="font-size:11px;font-weight:600;color:#8A6248;background:#F7E7CC;padding:3px 8px;border-radius:7px">30g</span><span style="font-size:11px;font-weight:700;color:#fff;background:#C42B2B;padding:3px 8px;border-radius:7px">50g</span><span style="font-size:11px;font-weight:600;color:#8A6248;background:#F7E7CC;padding:3px 8px;border-radius:7px">70g</span><span style="font-size:11px;font-weight:600;color:#8A6248;background:#F7E7CC;padding:3px 8px;border-radius:7px">100g</span></div>
+          <div style="display:flex;align-items:center;margin-top:2px"><span style="font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:18px;color:#C42B2B">€7.00</span><span style="margin-inline-start:auto;background:#C42B2B;color:#fff;font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:999px;cursor:pointer">أضِف إلى السلة</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============ 1e FOUNDATIONS ============ -->
+<div class="dv-opt" id="1e">
+<div class="dv-olabel"><a class="dv-oid" href="#1e">1e</a>Foundations — palette, type (Latin + Arabic), core components</div>
+<div class="dv-card" style="width:820px;background:#fff;padding:28px 30px;display:flex;flex-direction:column;gap:26px">
+  <div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:.1em;color:#9A7156;margin-bottom:10px">SEMANTIC PALETTE</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+      <div style="border-radius:14px;overflow:hidden;border:1px solid #F0DFC2"><div style="height:56px;background:#C42B2B"></div><div style="padding:8px 11px;font-size:11.5px;line-height:1.5"><b>primary</b> · CTA, price<br><span style="color:#9A7156">#C42B2B cherry</span></div></div>
+      <div style="border-radius:14px;overflow:hidden;border:1px solid #F0DFC2"><div style="height:56px;background:#FFC53D"></div><div style="padding:8px 11px;font-size:11.5px;line-height:1.5"><b>accent</b> · stickers, promo<br><span style="color:#9A7156">#FFC53D mango</span></div></div>
+      <div style="border-radius:14px;overflow:hidden;border:1px solid #F0DFC2"><div style="height:56px;background:#FDF3E3"></div><div style="padding:8px 11px;font-size:11.5px;line-height:1.5"><b>surface</b> · canvas<br><span style="color:#9A7156">#FDF3E3 cream</span></div></div>
+      <div style="border-radius:14px;overflow:hidden;border:1px solid #F0DFC2"><div style="height:56px;background:#3F7D4E"></div><div style="padding:8px 11px;font-size:11.5px;line-height:1.5"><b>success / trust</b> · Halal, story<br><span style="color:#9A7156">#3F7D4E leaf</span></div></div>
+      <div style="border-radius:14px;overflow:hidden;border:1px solid #F0DFC2"><div style="height:56px;background:#3A2420"></div><div style="padding:8px 11px;font-size:11.5px;line-height:1.5"><b>ink</b> · headings, footer<br><span style="color:#9A7156">#3A2420 cacao</span></div></div>
+      <div style="border-radius:14px;overflow:hidden;border:1px solid #F0DFC2"><div style="height:56px;background:#F7E7CC"></div><div style="padding:8px 11px;font-size:11.5px;line-height:1.5"><b>surface-2</b> · chips, wells<br><span style="color:#9A7156">#F7E7CC</span></div></div>
+      <div style="border-radius:14px;overflow:hidden;border:1px solid #F0DFC2"><div style="height:56px;background:#E4EFDF"></div><div style="padding:8px 11px;font-size:11.5px;line-height:1.5"><b>success-soft</b> · badges<br><span style="color:#9A7156">#E4EFDF</span></div></div>
+      <div style="border-radius:14px;overflow:hidden;border:1px solid #F0DFC2"><div style="height:56px;background:#B3261E"></div><div style="padding:8px 11px;font-size:11.5px;line-height:1.5"><b>error</b> · form errors<br><span style="color:#9A7156">#B3261E</span></div></div>
+    </div>
+  </div>
+  <div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:.1em;color:#9A7156;margin-bottom:10px">TYPE — BALOO BHAIJAAN 2 (DISPLAY) + READEX PRO (BODY) · BOTH COVER LATIN &amp; ARABIC NATIVELY</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start">
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:34px;color:#3A2420;line-height:1.1">Croquant &amp; sain</div>
+        <div style="font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:700;font-size:21px;color:#3A2420">Heading / card title</div>
+        <div style="font-size:15px;color:#5C4A38;line-height:1.6">Body — Readex Pro 400. Warm, rounded, very legible at small sizes on mobile.</div>
+        <div style="font-size:12.5px;color:#9A7156">Caption / meta — 12.5px</div>
+      </div>
+      <div dir="rtl" style="display:flex;flex-direction:column;gap:6px">
+        <div style="font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:800;font-size:34px;color:#3A2420;line-height:1.25">مقرمش وصحّي</div>
+        <div style="font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:700;font-size:21px;color:#3A2420">عنوان البطاقة</div>
+        <div style="font-size:15px;color:#5C4A38;line-height:1.85">نص أساسي — Readex Pro. مصمَّم أصلًا للعربية بنفس الشخصية الدافئة والمستديرة.</div>
+        <div style="font-size:12.5px;color:#9A7156">نص توضيحي — 12.5px</div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:.1em;color:#9A7156;margin-bottom:10px">BUTTONS · BADGES · INPUT · TOAST</div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+      <span style="background:#C42B2B;color:#FFF6E8;font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:700;font-size:15px;padding:12px 24px;border-radius:999px;cursor:pointer">Primary</span>
+      <span style="background:#3F7D4E;color:#fff;font-weight:700;font-size:14px;padding:12px 24px;border-radius:999px;cursor:pointer">Trust / story</span>
+      <span style="border:2px solid #EAD9BE;color:#5C3A2E;font-weight:600;font-size:14px;padding:10px 22px;border-radius:999px;cursor:pointer">Secondary</span>
+      <span style="background:#F1E4CE;color:#B8A183;font-weight:700;font-size:14px;padding:12px 24px;border-radius:999px">Disabled</span>
+      <span style="background:#E4EFDF;color:#3F7D4E;font-size:11.5px;font-weight:700;padding:5px 12px;border-radius:999px">100% HALAL</span>
+      <span style="background:#FCE9C8;color:#B07508;font-size:11.5px;font-weight:700;padding:5px 12px;border-radius:999px">NEW</span>
+      <span style="background:#F0DFC2;color:#7A5240;font-size:11.5px;font-weight:700;padding:5px 12px;border-radius:999px">🏠 LOCAL PICKUP ONLY</span>
+    </div>
+    <div style="display:flex;gap:14px;margin-top:14px;align-items:center;flex-wrap:wrap">
+      <input placeholder="Your email address" style="border:2px solid #EAD9BE;background:#fff;border-radius:999px;padding:12px 20px;font-size:14px;font-family:'Readex Pro',sans-serif;color:#3A2420;width:240px;outline:none">
+      <div style="background:#3A2420;color:#FFF3DC;border-radius:14px;padding:12px 18px;font-size:13.5px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 20px rgba(58,36,32,.25)"><span style="width:22px;height:22px;border-radius:50%;background:#3F7D4E;display:grid;place-items:center;font-size:12px">✓</span>Added to cart — Passion Fruit · 50 g</div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+<p style="margin:14px 0 0;font-size:12px;color:rgba(58,36,32,.55);font-family:'Readex Pro',sans-serif">Try next: "build the cart + checkout with the two payment paths" · "build the About Us page with Jana's letter" · "make the product listing with filters". Product photos are cropped from your Instagram — swap in the clean originals when you have them.</p>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1600}, &quot;priceLocale&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;en&quot;, &quot;fr&quot;], &quot;default&quot;: &quot;en&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Commerce&quot;}, &quot;showCookieBanner&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Homepage&quot;}}">
+class Component extends DCLogic {
+  state = { w: 50, added: false, cookieDismissed: false };
+  renderVals() {
+    const P = { 30: 4.5, 50: 7, 70: 9.5, 100: 14.5 };
+    const fr = (this.props.priceLocale ?? 'en') === 'fr';
+    const fmt = v => fr ? v.toFixed(2).replace('.', ',') + ' €' : '€' + v.toFixed(2);
+    const sel = this.state.w;
+    const weights = [30, 50, 70, 100].map(g => ({
+      g, label: g + ' g', price: fmt(P[g]), onPick: () => this.setState({ w: g, added: false }),
+      bg: g === sel ? '#C42B2B' : '#fff', fg: g === sel ? '#FFF6E8' : '#7A4A3A', bd: g === sel ? '#C42B2B' : '#EAD9BE'
+    }));
+    return {
+      featured: [
+        { name: 'Crunchy Blackberries', note: 'Deep, jammy, extra crisp', img: 'assets/blackberry.png', badge: 'BESTSELLER' },
+        { name: 'Peach Slices', note: 'Soft pink, melts then crunches', img: 'assets/peach.png', badge: null },
+        { name: 'Passion Fruit Cubes', note: 'Tangy golden cubes', img: 'assets/passionfruit.png', badge: 'NEW' },
+        { name: 'Dragon Fruit Chips', note: 'Speckled, light, addictive', img: 'assets/dragonfruit.png', badge: null }
+      ],
+      weights,
+      fromPrice: fmt(P[30]),
+      perBag: '30 g \u2248 a full punnet of fresh fruit',
+      detailPrice: fmt(P[sel]),
+      ctaLabel: this.state.added ? 'Added \u2713' : 'Add to cart',
+      ctaBg: this.state.added ? '#3F7D4E' : '#C42B2B',
+      addToCart: () => this.setState({ added: true }),
+      showCookie: (this.props.showCookieBanner ?? true) && !this.state.cookieDismissed,
+      dismissCookie: () => this.setState({ cookieDismissed: true })
+    };
+  }
+}
+</script>
+</body>
+</html>

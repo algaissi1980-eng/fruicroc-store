@@ -3,10 +3,14 @@
 import { useEffect, useState, useCallback } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/lib/supabase/client";
+import { compressImage } from "@/lib/compressImage";
 import type { Product, LocalizedString, VatCategory } from "@/types";
 import type { Locale } from "@/i18n/routing";
 
 const LOCALES: Locale[] = ["fr", "en", "ar"];
+
+// Fixed storefront categories (match the homepage tiles)
+const CATEGORIES = ["fruits", "vegetables", "candy"] as const;
 
 const emptyLocalized: LocalizedString = { fr: "", en: "", ar: "" };
 
@@ -14,8 +18,8 @@ interface ProductForm {
   id?: string;
   name: LocalizedString;
   description: LocalizedString;
+  ingredients: LocalizedString;
   slug: LocalizedString;
-  price_excl_vat: number;
   vat_category: VatCategory;
   category: string;
   stock: number;
@@ -26,8 +30,8 @@ interface ProductForm {
 const emptyForm: ProductForm = {
   name: { ...emptyLocalized },
   description: { ...emptyLocalized },
+  ingredients: { ...emptyLocalized },
   slug: { ...emptyLocalized },
-  price_excl_vat: 0,
   vat_category: "food",
   category: "fruits",
   stock: 0,
@@ -47,6 +51,7 @@ export default function AdminProductsTab() {
   const [products, setProducts] = useState<Product[]>([]);
   const [form, setForm] = useState<ProductForm | null>(null);
   const [langTab, setLangTab] = useState<Locale>("fr");
+  const [uploading, setUploading] = useState(false);
 
   const load = useCallback(async () => {
     const { data } = await supabase
@@ -60,8 +65,30 @@ export default function AdminProductsTab() {
     load();
   }, [load]);
 
+  const uploadImage = async (file: File) => {
+    setUploading(true);
+    try {
+      const compressed = await compressImage(file);
+      // Storage keys must be ASCII — never use the original filename
+      // (Arabic/accented names throw "Invalid key")
+      const ext = compressed.type === "image/webp" ? "webp" : "jpg";
+      const path = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+      const { error } = await supabase.storage
+        .from("product-images")
+        .upload(path, compressed, { contentType: compressed.type });
+      if (error) throw error;
+      const { data } = supabase.storage.from("product-images").getPublicUrl(path);
+      setForm((f) => (f ? { ...f, image_url: data.publicUrl } : f));
+      toast.success("Image uploaded — remember to Save the product");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Upload failed");
+    } finally {
+      setUploading(false);
+    }
+  };
+
   const setLocalizedField =
-    (field: "name" | "description") => (value: string) =>
+    (field: "name" | "description" | "ingredients") => (value: string) =>
       setForm((f) =>
         f ? { ...f, [field]: { ...f[field], [langTab]: value } } : f
       );
@@ -80,8 +107,9 @@ export default function AdminProductsTab() {
     const payload = {
       name: form.name,
       description: form.description,
+      ingredients: form.ingredients,
       slug,
-      price_excl_vat: form.price_excl_vat,
+      price_excl_vat: 4.5, // brand-wide weight tiers drive pricing (lib/weights.ts)
       vat_category: form.vat_category,
       category: form.category,
       stock: form.stock,
@@ -95,7 +123,7 @@ export default function AdminProductsTab() {
 
     if (error) toast.error(error.message);
     else {
-      toast.success("Product saved");
+      toast.success("Product saved ✓");
       setForm(null);
       load();
     }
@@ -106,8 +134,8 @@ export default function AdminProductsTab() {
       id: p.id,
       name: { ...emptyLocalized, ...p.name },
       description: { ...emptyLocalized, ...p.description },
+      ingredients: { ...emptyLocalized, ...(p.ingredients ?? {}) },
       slug: { ...emptyLocalized, ...p.slug },
-      price_excl_vat: p.price_excl_vat,
       vat_category: p.vat_category,
       category: p.category,
       stock: p.stock,
@@ -127,7 +155,7 @@ export default function AdminProductsTab() {
       <button
         type="button"
         onClick={() => setForm({ ...emptyForm })}
-        className="mb-4 rounded bg-[var(--accent)] px-3 py-2 text-white"
+        className="btn-primary mb-5"
       >
         + New product
       </button>
@@ -135,151 +163,190 @@ export default function AdminProductsTab() {
       {form && (
         <form
           onSubmit={save}
-          className="mb-6 space-y-3 rounded border border-[var(--border)] p-4"
+          className="mb-6 flex flex-col gap-4 rounded-[20px] border border-[var(--border)] bg-white p-5 shadow-[var(--shadow-card)]"
         >
-          {/* fr/en/ar language tabs — fr required, en/ar fall back to fr */}
+          <h3 className="m-0 text-lg font-extrabold text-[var(--ink)]">
+            {form.id ? "Edit product" : "New product"}
+          </h3>
+
+          {/* Image */}
+          <div className="flex items-center gap-4">
+            {form.image_url ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={form.image_url}
+                alt=""
+                className="h-20 w-20 rounded-2xl border border-[var(--border)] object-cover"
+              />
+            ) : (
+              <span className="grid h-20 w-20 place-items-center rounded-2xl bg-[var(--surface-2)] text-2xl">
+                📷
+              </span>
+            )}
+            <label className="btn-secondary cursor-pointer">
+              {uploading ? "Uploading…" : form.image_url ? "Replace image" : "Upload image"}
+              <input
+                type="file"
+                accept="image/*"
+                hidden
+                disabled={uploading}
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) uploadImage(file);
+                }}
+              />
+            </label>
+          </div>
+
+          {/* fr/en/ar tabs — fr required, en/ar fall back to fr on the site */}
           <div className="flex gap-2">
             {LOCALES.map((l) => (
               <button
                 key={l}
                 type="button"
                 onClick={() => setLangTab(l)}
-                className={`rounded px-3 py-1 ${
-                  langTab === l ? "bg-[var(--accent)] text-white" : "bg-[var(--surface)]"
+                className={`cursor-pointer rounded-full border-2 px-4 py-1.5 text-[13px] font-bold ${
+                  langTab === l
+                    ? "border-[var(--primary)] bg-[var(--primary)] text-[var(--on-primary)]"
+                    : "border-[var(--border-input)] bg-white text-[var(--body)]"
                 }`}
               >
                 {l.toUpperCase()}
                 {l === "fr" && " *"}
+                {l !== "fr" && !form.name[l] && " ⚠"}
               </button>
             ))}
           </div>
 
           <input
-            placeholder={`Name (${langTab})`}
+            placeholder={`Name (${langTab.toUpperCase()})`}
             dir={langTab === "ar" ? "rtl" : "ltr"}
             value={form.name[langTab] ?? ""}
             onChange={(e) => setLocalizedField("name")(e.target.value)}
-            className="w-full rounded border border-[var(--border)] p-2"
+            className="input-pill w-full"
           />
           <textarea
-            placeholder={`Description (${langTab})`}
+            placeholder={`Description (${langTab.toUpperCase()})`}
             dir={langTab === "ar" ? "rtl" : "ltr"}
+            rows={2}
             value={form.description[langTab] ?? ""}
             onChange={(e) => setLocalizedField("description")(e.target.value)}
-            className="w-full rounded border border-[var(--border)] p-2"
+            className="w-full rounded-[20px] border-2 border-[var(--border-input)] bg-white p-3.5 text-[15px] text-[var(--ink)] outline-none focus:border-[var(--muted)]"
+          />
+          <input
+            placeholder={`Ingredients (${langTab.toUpperCase()})`}
+            dir={langTab === "ar" ? "rtl" : "ltr"}
+            value={form.ingredients[langTab] ?? ""}
+            onChange={(e) => setLocalizedField("ingredients")(e.target.value)}
+            className="input-pill w-full"
           />
 
-          <div className="flex flex-wrap gap-3">
-            <label className="flex items-center gap-1">
-              Price € (excl. VAT)
-              <input
-                type="number"
-                step="0.01"
-                value={form.price_excl_vat}
-                onChange={(e) =>
-                  setForm({ ...form, price_excl_vat: Number(e.target.value) })
-                }
-                className="w-24 rounded border border-[var(--border)] p-1"
-              />
+          <div className="flex flex-wrap items-end gap-4">
+            <label className="block text-[13px] font-bold text-[var(--muted)]">
+              Category
+              <select
+                value={form.category}
+                onChange={(e) => setForm({ ...form, category: e.target.value })}
+                className="input-pill mt-1 block !py-2.5"
+              >
+                {CATEGORIES.map((c) => (
+                  <option key={c} value={c}>
+                    {c[0].toUpperCase() + c.slice(1)}
+                  </option>
+                ))}
+              </select>
             </label>
-            <label className="flex items-center gap-1">
-              Stock
+            <label className="block text-[13px] font-bold text-[var(--muted)]">
+              Stock (bags)
               <input
                 type="number"
+                min={0}
                 value={form.stock}
-                onChange={(e) =>
-                  setForm({ ...form, stock: Number(e.target.value) })
-                }
-                className="w-20 rounded border border-[var(--border)] p-1"
+                onChange={(e) => setForm({ ...form, stock: Number(e.target.value) })}
+                className="input-pill mt-1 block w-28 !py-2.5"
               />
             </label>
-            <label className="flex items-center gap-1">
-              VAT
+            <label className="block text-[13px] font-bold text-[var(--muted)]">
+              VAT category
               <select
                 value={form.vat_category}
                 onChange={(e) =>
-                  setForm({
-                    ...form,
-                    vat_category: e.target.value as VatCategory,
-                  })
+                  setForm({ ...form, vat_category: e.target.value as VatCategory })
                 }
-                className="rounded border border-[var(--border)] p-1"
+                className="input-pill mt-1 block !py-2.5"
               >
-                <option value="food">food (reduced)</option>
-                <option value="standard">standard</option>
+                <option value="food">Food (reduced rate)</option>
+                <option value="standard">Standard rate</option>
               </select>
             </label>
-            <label className="flex items-center gap-1">
-              Category
-              <input
-                value={form.category}
-                onChange={(e) => setForm({ ...form, category: e.target.value })}
-                className="w-28 rounded border border-[var(--border)] p-1"
-              />
-            </label>
-            <label className="flex items-center gap-1">
+            <label className="flex cursor-pointer items-center gap-2 pb-2.5 text-sm font-semibold text-[var(--body)]">
               <input
                 type="checkbox"
                 checked={form.is_available}
-                onChange={(e) =>
-                  setForm({ ...form, is_available: e.target.checked })
-                }
+                onChange={(e) => setForm({ ...form, is_available: e.target.checked })}
+                className="h-4 w-4 accent-[var(--success)]"
               />
-              Available
+              Visible in shop
             </label>
           </div>
 
-          <input
-            placeholder="Image URL"
-            value={form.image_url}
-            onChange={(e) => setForm({ ...form, image_url: e.target.value })}
-            className="w-full rounded border border-[var(--border)] p-2"
-          />
+          <p className="m-0 rounded-xl bg-[var(--surface)] p-3 text-xs text-[var(--muted)]">
+            Prices are brand-wide by weight: 30 g €4.50 · 50 g €7.00 · 70 g
+            €9.50 · 100 g €14.50 — no per-product price to set.
+          </p>
 
-          <div className="flex gap-2">
-            <button
-              type="submit"
-              className="rounded bg-[var(--accent)] px-4 py-2 text-white"
-            >
-              Save
+          <div className="flex gap-2.5">
+            <button type="submit" className="btn-primary">
+              Save product
             </button>
-            <button
-              type="button"
-              onClick={() => setForm(null)}
-              className="rounded border border-[var(--border)] px-4 py-2"
-            >
+            <button type="button" onClick={() => setForm(null)} className="btn-secondary">
               Cancel
             </button>
           </div>
         </form>
       )}
 
-      <ul className="space-y-2">
+      {/* Product list with thumbnails */}
+      <ul className="m-0 grid list-none gap-2.5 p-0">
         {products.map((p) => (
           <li
             key={p.id}
-            className="flex items-center justify-between rounded border border-[var(--border)] p-2"
+            className="flex items-center gap-3.5 rounded-2xl border border-[var(--border)] bg-white p-3"
           >
-            <span>
-              {p.name.fr}{" "}
-              <small className="text-[var(--ink-600)]">
-                {p.price_excl_vat} € · stock {p.stock}
-                {!p.name.en && " · ⚠ EN missing"}
-                {!p.name.ar && " · ⚠ AR missing"}
-              </small>
-            </span>
-            <span className="flex gap-2">
-              <button type="button" onClick={() => edit(p)} className="underline">
-                Edit
-              </button>
-              <button
-                type="button"
-                onClick={() => remove(p.id)}
-                className="text-[var(--danger)] underline"
-              >
-                Delete
-              </button>
-            </span>
+            {p.image_url ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={p.image_url}
+                alt=""
+                className="h-14 w-14 shrink-0 rounded-xl object-cover"
+              />
+            ) : (
+              <span className="grid h-14 w-14 shrink-0 place-items-center rounded-xl bg-[var(--surface-2)] text-xl">
+                📷
+              </span>
+            )}
+            <div className="min-w-0 flex-1">
+              <p className="m-0 truncate font-bold text-[var(--ink)]">
+                {p.name.fr}
+              </p>
+              <p className="m-0 flex flex-wrap gap-x-2 text-xs text-[var(--muted)]">
+                <span className="capitalize">{p.category}</span>
+                <span>· stock {p.stock}</span>
+                {!p.is_available && <span className="font-bold text-[var(--error)]">· hidden</span>}
+                {!p.name.en && <span className="text-[var(--accent-ink-2)]">· EN missing</span>}
+                {!p.name.ar && <span className="text-[var(--accent-ink-2)]">· AR missing</span>}
+              </p>
+            </div>
+            <button type="button" onClick={() => edit(p)} className="btn-secondary !min-h-0 px-3.5 py-1.5 text-[13px]">
+              Edit
+            </button>
+            <button
+              type="button"
+              onClick={() => remove(p.id)}
+              className="btn-secondary !min-h-0 px-3.5 py-1.5 text-[13px] !text-[var(--error)]"
+            >
+              Delete
+            </button>
           </li>
         ))}
       </ul>

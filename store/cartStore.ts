@@ -1,8 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { CartStore } from "../types";
-
-const generateId = () => Math.random().toString(36).substring(2, 9);
+import { tierPrice, type WeightG } from "../lib/weights";
 
 export const useCartStore = create<CartStore>()(
   persist(
@@ -13,14 +12,15 @@ export const useCartStore = create<CartStore>()(
       setHasHydrated: (val: boolean) => set({ _hasHydrated: val }),
       toggleCart: () => set({ isOpen: !get().isOpen }),
 
-      addToCart: (product, quantity) => {
+      addToCart: (product, weightG, quantity) => {
+        const cartItemId = `${product.id}-${weightG}`;
         const currentItems = get().items;
-        const existing = currentItems.find((item) => item.id === product.id);
+        const existing = currentItems.find((i) => i.cartItemId === cartItemId);
 
         if (existing) {
           set({
             items: currentItems.map((item) =>
-              item.cartItemId === existing.cartItemId
+              item.cartItemId === cartItemId
                 ? { ...item, quantity: item.quantity + quantity }
                 : item
             ),
@@ -31,9 +31,10 @@ export const useCartStore = create<CartStore>()(
               ...currentItems,
               {
                 id: product.id,
-                cartItemId: generateId(),
+                cartItemId,
                 name: product.name,
-                price_excl_vat: product.price_excl_vat,
+                weightG,
+                price_excl_vat: tierPrice(weightG as WeightG),
                 vat_category: product.vat_category,
                 quantity,
                 image_url: product.image_url ?? undefined,
@@ -61,6 +62,7 @@ export const useCartStore = create<CartStore>()(
     }),
     {
       name: "fruicroc-cart-storage",
+      version: 2, // weight-tier cart — discard old carts
       onRehydrateStorage: () => (state) => {
         state?.setHasHydrated(true);
       },

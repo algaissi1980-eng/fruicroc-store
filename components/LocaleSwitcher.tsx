@@ -4,7 +4,7 @@ import { useLocale } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 
-const LABELS: Record<string, string> = { fr: "FR", en: "EN", ar: "ع" };
+const LABELS: Record<string, string> = { fr: "FR", en: "EN", ar: "AR" };
 
 export default function LocaleSwitcher() {
   const locale = useLocale();
@@ -12,17 +12,26 @@ export default function LocaleSwitcher() {
   const router = useRouter();
 
   return (
-    <select
-      value={locale}
-      onChange={(e) => router.replace(pathname, { locale: e.target.value as never })}
+    <div
+      role="group"
       aria-label="Language"
-      className="border border-[var(--border)] rounded px-1 py-0.5"
+      className="flex rounded-full bg-[var(--surface-2)] p-[3px] text-[12.5px] font-semibold"
     >
       {routing.locales.map((l) => (
-        <option key={l} value={l}>
+        <button
+          key={l}
+          type="button"
+          onClick={() => router.replace(pathname, { locale: l })}
+          aria-pressed={l === locale}
+          className={`rounded-full px-3 py-[5px] transition-colors ${
+            l === locale
+              ? "bg-white text-[var(--primary)] shadow-[0_1px_3px_rgba(58,36,32,.15)]"
+              : "text-[var(--muted)]"
+          }`}
+        >
           {LABELS[l]}
-        </option>
+        </button>
       ))}
-    </select>
+    </div>
   );
 }

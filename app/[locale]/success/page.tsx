@@ -28,18 +28,22 @@ function SuccessContent() {
   }, [orderId]);
 
   return (
-    <div className="mx-auto max-w-lg px-4 py-10 text-center">
-      <h1 className="mb-2 text-2xl font-bold">{t("title")}</h1>
+    <div className="mx-auto max-w-lg px-5 py-12 text-center">
+      <h1 className="m-0 mb-2 text-[27px] font-extrabold text-[var(--ink)]">
+        {t("title")} 🎉
+      </h1>
       {order && (
-        <p className="mb-6 text-[var(--ink-600)]">
+        <p className="mb-6 font-mono text-[var(--muted)]">
           {t("orderNumber", { number: order.id.slice(0, 8).toUpperCase() })}
         </p>
       )}
 
       {order?.payment_method === "bank_transfer" && (
-        <section className="mb-8 rounded border border-[var(--border)] p-4 text-start">
-          <h2 className="mb-2 font-semibold">{t("bankInstructions")}</h2>
-          <p className="mb-4 text-sm text-[var(--ink-600)]">{t("bankIntro")}</p>
+        <section className="mb-8 rounded-[20px] border border-[var(--border)] bg-white p-6 text-start shadow-[var(--shadow-card)]">
+          <h2 className="m-0 mb-2 text-lg font-bold text-[var(--ink)]">
+            {t("bankInstructions")}
+          </h2>
+          <p className="mb-4 text-sm text-[var(--muted)]">{t("bankIntro")}</p>
           <dl className="space-y-2 text-sm">
             {settings?.bank_account_holder && (
               <div>

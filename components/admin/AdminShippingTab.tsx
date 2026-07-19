@@ -34,6 +34,9 @@ export default function AdminShippingTab() {
     else toast.success(`${zone.country_code} saved`);
   };
 
+  const countryName = (code: string) =>
+    new Intl.DisplayNames(["en"], { type: "region" }).of(code) ?? code;
+
   return (
     <table className="w-full text-sm">
       <thead>
@@ -48,7 +51,12 @@ export default function AdminShippingTab() {
       <tbody>
         {zones.map((z) => (
           <tr key={z.country_code} className="border-b border-[var(--border)]">
-            <td className="p-2 font-mono">{z.country_code}</td>
+            <td className="p-2 font-semibold text-[var(--ink)]">
+              {countryName(z.country_code)}{" "}
+              <span className="font-mono text-xs text-[var(--muted)]">
+                {z.country_code}
+              </span>
+            </td>
             <td className="p-2">
               <input
                 type="number"

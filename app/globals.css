@@ -1,30 +1,156 @@
 @import "tailwindcss";
 
 /* ==========================================================================
-   Fruicroc — STRUCTURE ONLY.
-   Visual design system pending (Claude Design handoff).
+   Fruit Croquant — design system "épicerie chaleureuse"
+   Source: design_handoff_fruit_croquant_commerce_core
    Rules: logical-property utilities only (ms-, me-, ps-, pe-, text-start,
-   text-end), never left/right utilities — required for Arabic RTL.
+   text-end, start-/end-), never left/right — required for Arabic RTL.
    ========================================================================== */
 
 :root {
   color-scheme: light;
 
-  /* Placeholder tokens — replaced by the design system later */
-  --bg: #ffffff;
-  --ink-900: #171717;
-  --ink-600: #525252;
-  --accent: #16a34a; /* temporary */
-  --danger: #dc2626;
-  --surface: #f5f5f5;
-  --border: #e5e5e5;
-}
+  /* Semantic palette */
+  --primary: #C42B2B;        /* cherry red — CTAs, prices, active states */
+  --primary-ink: #A31E1E;    /* hover */
+  --accent: #FFC53D;         /* mango yellow — stickers, promo */
+  --accent-ink: #7A4A00;
+  --accent-ink-2: #B07508;
+  --accent-soft: #FCE9C8;
+  --surface: #FDF3E3;        /* cream canvas */
+  --surface-2: #F7E7CC;      /* chips, wells */
+  --border: #F0DFC2;
+  --border-input: #EAD9BE;
+  --success: #3F7D4E;        /* leaf green — Halal, trust, story */
+  --success-soft: #E4EFDF;
+  --story-bg: #EFF5EC;
+  --ink: #3A2420;            /* headings, footer bg (cacao) */
+  --ink-900: #3A2420;
+  --body: #5C3A2E;
+  --body-2: #6E4A38;
+  --muted: #8A6248;
+  --muted-2: #9A7156;
+  --chip-ink: #7A5240;
+  --error: #B3261E;
+  --danger: #B3261E;
+  --on-primary: #FFF6E8;     /* warm white — never pure white on red */
+  --on-primary-bar: #FFF3DC;
+  --footer-text: #D9BFA8;
+  --disabled-bg: #F1E4CE;
+  --disabled-ink: #B8A183;
 
-html[dir="rtl"] {
-  /* RTL comes free via logical properties; add overrides here only if needed */
+  /* Elevation */
+  --shadow-card: 0 2px 8px rgba(58, 36, 32, 0.08);
+  --shadow-cta: 0 4px 14px rgba(196, 43, 43, 0.35);
+  --shadow-float: 0 12px 36px rgba(58, 36, 32, 0.25);
+  --shadow-ring: 0 18px 44px rgba(58, 36, 32, 0.16);
 }
 
 body {
-  background: var(--bg);
-  color: var(--ink-900);
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display), var(--font-body), sans-serif;
+}
+
+/* Arabic runs longer and needs more line-height */
+html[dir="rtl"] body { line-height: 1.8; }
+html[dir="rtl"] h1 { line-height: 1.3 !important; }
+html[dir="rtl"] h2, html[dir="rtl"] h3 { line-height: 1.35; }
+
+a { color: var(--primary); }
+a:hover { color: var(--primary-ink); }
+
+/* ---- Reusable components ---- */
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--on-primary);
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  border-radius: 999px;
+  box-shadow: var(--shadow-cta);
+  cursor: pointer;
+  transition: background 150ms ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 13px 28px;
+}
+.btn-primary:hover { background: var(--primary-ink); }
+.btn-primary:disabled { background: var(--disabled-bg); color: var(--disabled-ink); box-shadow: none; cursor: default; }
+
+.btn-trust {
+  background: var(--success);
+  color: #fff;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: filter 150ms ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 12px 24px;
+}
+.btn-trust:hover { filter: brightness(0.93); }
+
+.btn-secondary {
+  border: 2px solid var(--border-input);
+  color: var(--body);
+  font-weight: 600;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 22px;
+  transition: border-color 150ms ease;
+}
+.btn-secondary:hover { border-color: var(--muted); }
+
+.badge {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 5px 12px;
+  border-radius: 999px;
+  display: inline-block;
+}
+.badge-success { background: var(--success-soft); color: var(--success); }
+.badge-accent { background: var(--accent-soft); color: var(--accent-ink-2); }
+.badge-pickup { background: var(--border); color: var(--chip-ink); }
+
+.input-pill {
+  border: 2px solid var(--border-input);
+  background: #fff;
+  border-radius: 999px;
+  padding: 12px 20px;
+  font-size: 15px;
+  font-family: var(--font-body), sans-serif;
+  color: var(--ink);
+  outline: none;
+}
+.input-pill:focus { border-color: var(--muted); }
+
+.card-hover { transition: transform 150ms ease, box-shadow 150ms ease; }
+.card-hover:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(58, 36, 32, 0.14); }
+
+/* Scalloped section divider (echo of the logo badge).
+   Set the two colors per use: --scallop-top (upper section), --scallop-bottom. */
+.scallop {
+  height: 18px;
+  background:
+    radial-gradient(circle at 14px -5px, var(--scallop-top) 15px, transparent 16px)
+      0 0 / 34px 18px repeat-x,
+    var(--scallop-bottom);
 }

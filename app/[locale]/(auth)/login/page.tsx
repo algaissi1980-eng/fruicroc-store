@@ -28,36 +28,35 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="mx-auto max-w-sm px-4 py-10">
-      <h1 className="mb-6 text-2xl font-bold">{t("title")}</h1>
+    <div className="mx-auto max-w-sm px-5 py-12">
+      <div className="rounded-[24px] border border-[var(--border)] bg-white p-7 shadow-[var(--shadow-card)]">
+        <h1 className="m-0 mb-6 text-[27px] font-extrabold text-[var(--ink)]">
+          {t("title")}
+        </h1>
 
-      {sent ? (
-        <p>{t("linkSent")}</p>
-      ) : (
-        <form onSubmit={sendLink} className="space-y-4">
-          <input
-            required
-            type="email"
-            placeholder={t("email")}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full rounded border border-[var(--border)] p-2"
-          />
-          <button
-            type="submit"
-            className="w-full rounded bg-[var(--accent)] px-4 py-2 text-white"
-          >
-            {t("sendLink")}
-          </button>
-          <button
-            type="button"
-            onClick={google}
-            className="w-full rounded border border-[var(--border)] px-4 py-2"
-          >
-            {t("google")}
-          </button>
-        </form>
-      )}
+        {sent ? (
+          <p className="m-0 rounded-2xl bg-[var(--success-soft)] p-4 font-semibold text-[var(--success)]">
+            {t("linkSent")}
+          </p>
+        ) : (
+          <form onSubmit={sendLink} className="flex flex-col gap-3.5">
+            <input
+              required
+              type="email"
+              placeholder={t("email")}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="input-pill w-full"
+            />
+            <button type="submit" className="btn-primary w-full">
+              {t("sendLink")}
+            </button>
+            <button type="button" onClick={google} className="btn-secondary w-full">
+              {t("google")}
+            </button>
+          </form>
+        )}
+      </div>
     </div>
   );
 }

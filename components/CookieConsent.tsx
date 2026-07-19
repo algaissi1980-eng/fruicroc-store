@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 
 const STORAGE_KEY = "fruicroc-cookie-consent";
 
-export type CookieChoice = "accepted" | "rejected";
+export type CookieChoice = "all" | "essential";
 
 export function getCookieConsent(): CookieChoice | null {
   if (typeof window === "undefined") return null;
@@ -24,7 +25,7 @@ export default function CookieConsent() {
   const choose = (choice: CookieChoice) => {
     localStorage.setItem(STORAGE_KEY, choice);
     setVisible(false);
-    // Analytics / non-essential scripts must check getCookieConsent() === 'accepted'
+    // Analytics / non-essential scripts must check getCookieConsent() === 'all'
   };
 
   if (!visible) return null;
@@ -33,28 +34,33 @@ export default function CookieConsent() {
     <div
       role="dialog"
       aria-live="polite"
-      className="fixed bottom-0 start-0 end-0 z-50 border-t border-[var(--border)] bg-[var(--surface)] p-4"
+      className="fixed bottom-5 start-1/2 z-50 flex w-[720px] max-w-[92%] -translate-x-1/2 rtl:translate-x-1/2 flex-col items-center gap-4 rounded-[20px] border border-[var(--border)] bg-white p-5 shadow-[var(--shadow-float)] sm:flex-row sm:px-6"
     >
-      <p className="mb-3 text-sm">
-        {t("message")}{" "}
-        <Link href="/legal/confidentialite" className="underline">
-          {t("policy")}
-        </Link>
+      <Image
+        src="/logo.png"
+        alt=""
+        width={44}
+        height={44}
+        className="hidden h-11 w-11 rounded-full sm:block"
+      />
+      <p className="m-0 flex-1 text-[13.5px] leading-relaxed text-[var(--body)]">
+        <b className="text-[var(--ink)]">{t("title")}</b> {t("message")}{" "}
+        <Link href="/legal/confidentialite">{t("policyLink")}</Link>.
       </p>
-      <div className="flex gap-3">
+      <div className="flex items-center gap-2.5">
         <button
           type="button"
-          onClick={() => choose("accepted")}
-          className="rounded bg-[var(--accent)] px-4 py-2 text-white"
+          onClick={() => choose("essential")}
+          className="cursor-pointer px-4 py-3 text-[13.5px] font-semibold text-[var(--muted)]"
         >
-          {t("accept")}
+          {t("essentials")}
         </button>
         <button
           type="button"
-          onClick={() => choose("rejected")}
-          className="rounded border border-[var(--border)] px-4 py-2"
+          onClick={() => choose("all")}
+          className="btn-trust px-5 py-3 text-[13.5px]"
         >
-          {t("reject")}
+          {t("accept")}
         </button>
       </div>
     </div>

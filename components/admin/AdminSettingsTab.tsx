@@ -26,7 +26,7 @@ export default function AdminSettingsTab() {
         bank_account_holder: settings.bank_account_holder,
         bank_iban: settings.bank_iban,
         bank_bic: settings.bank_bic,
-        categories: settings.categories,
+        announcement: settings.announcement,
       })
       .eq("id", 1);
     if (error) toast.error(error.message);
@@ -67,17 +67,30 @@ export default function AdminSettingsTab() {
         />
       </label>
 
-      <h2 className="font-semibold">Categories</h2>
-      <input
-        value={settings.categories.join(", ")}
-        onChange={(e) =>
-          setSettings({
-            ...settings,
-            categories: e.target.value.split(",").map((s) => s.trim()),
-          })
-        }
-        className="w-full rounded border border-[var(--border)] p-2"
-      />
+      <h2 className="font-semibold">Announcement bar (empty = hidden)</h2>
+      {(["fr", "en", "ar"] as const).map((l) => (
+        <label key={l} className="block">
+          {l.toUpperCase()}
+          <input
+            dir={l === "ar" ? "rtl" : "ltr"}
+            value={settings.announcement?.[l] ?? ""}
+            onChange={(e) =>
+              setSettings({
+                ...settings,
+                announcement: {
+                  fr: settings.announcement?.fr ?? "",
+                  ...settings.announcement,
+                  [l]: e.target.value,
+                },
+              })
+            }
+            className="mt-1 w-full rounded border border-[var(--border)] p-2"
+          />
+        </label>
+      ))}
+
+      {/* Categories are fixed (fruits / vegetables / candy) to match the
+          storefront tiles — no free-text category management. */}
 
       <button
         type="button"

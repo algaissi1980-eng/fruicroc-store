@@ -25,6 +25,9 @@ export default function AdminVatTab() {
     else toast.success(`${rate.country_code} ${rate.category} saved`);
   };
 
+  const countryName = (code: string) =>
+    new Intl.DisplayNames(["en"], { type: "region" }).of(code) ?? code;
+
   return (
     <table className="w-full text-sm">
       <thead>
@@ -38,8 +41,13 @@ export default function AdminVatTab() {
       <tbody>
         {rates.map((r) => (
           <tr key={r.id} className="border-b border-[var(--border)]">
-            <td className="p-2 font-mono">{r.country_code}</td>
-            <td className="p-2">{r.category}</td>
+            <td className="p-2 font-semibold text-[var(--ink)]">
+              {countryName(r.country_code)}{" "}
+              <span className="font-mono text-xs text-[var(--muted)]">
+                {r.country_code}
+              </span>
+            </td>
+            <td className="p-2 capitalize">{r.category}</td>
             <td className="p-2">
               <input
                 type="number"

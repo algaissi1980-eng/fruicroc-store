@@ -89,6 +89,8 @@ export interface Order {
   currency: "EUR";
   status: OrderStatus;
   payment_method: PaymentMethod;
+  promo_code?: string | null;
+  discount_eur?: number | null;
   paypal_order_id?: string | null;
   bank_transfer_reference?: string | null;
   paid_at?: string | null;
@@ -108,12 +110,13 @@ export interface OrderItem {
   products?: { name: LocalizedString; image_url?: string };
 }
 
-// 🟢 Cart Item
+// 🟢 Cart Item — weight-tier based (brand-wide tier map, see lib/weights.ts)
 export interface CartItem {
-  id: string;
-  cartItemId: string;
+  id: string; // product id
+  cartItemId: string; // `${productId}-${weightG}`
   name: LocalizedString;
-  price_excl_vat: number;
+  weightG: 30 | 50 | 70 | 100;
+  price_excl_vat: number; // tier price snapshot
   vat_category: VatCategory;
   quantity: number;
   image_url?: string;
@@ -127,7 +130,11 @@ export interface CartStore {
   _hasHydrated: boolean;
   setHasHydrated: (val: boolean) => void;
   toggleCart: () => void;
-  addToCart: (product: Product, quantity: number) => void;
+  addToCart: (
+    product: Product,
+    weightG: 30 | 50 | 70 | 100,
+    quantity: number
+  ) => void;
   removeFromCart: (cartItemId: string) => void;
   updateQuantity: (cartItemId: string, quantity: number) => void;
   clearCart: () => void;

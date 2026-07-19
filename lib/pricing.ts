@@ -9,6 +9,7 @@ import type { CartItem, ShippingZone, VatRate, VatCategory, CountryCode } from "
 
 export interface OrderTotals {
   subtotalExclVat: number;
+  discount: number;
   vatAmount: number;
   vatRatePercent: number; // dominant rate applied (food)
   shipping: number;
@@ -52,35 +53,39 @@ export function computeTotals(
   items: CartItem[],
   zones: ShippingZone[],
   rates: VatRate[],
-  country: CountryCode
+  country: CountryCode,
+  discountPercent = 0
 ): OrderTotals {
   const subtotalExclVat = round2(
     items.reduce((sum, i) => sum + i.price_excl_vat * i.quantity, 0)
   );
 
+  // Promo discount applied on the net subtotal, before VAT
+  const discount = round2(subtotalExclVat * (discountPercent / 100));
+  const discountFactor =
+    subtotalExclVat > 0 ? (subtotalExclVat - discount) / subtotalExclVat : 1;
+
   // VAT per item category (freeze-dried fruit → usually reduced "food" rate)
   let vatAmount = 0;
   for (const item of items) {
     const rate = getVatRate(rates, country, item.vat_category);
-    vatAmount += item.price_excl_vat * item.quantity * (rate / 100);
+    vatAmount +=
+      item.price_excl_vat * item.quantity * discountFactor * (rate / 100);
   }
   vatAmount = round2(vatAmount);
 
-  const shipping = getShippingCost(zones, country, subtotalExclVat);
+  const shipping = getShippingCost(zones, country, subtotalExclVat - discount);
   const vatRatePercent = getVatRate(rates, country, "food");
 
   return {
     subtotalExclVat,
+    discount,
     vatAmount,
     vatRatePercent,
     shipping,
-    total: round2(subtotalExclVat + vatAmount + shipping),
+    total: round2(subtotalExclVat - discount + vatAmount + shipping),
   };
 }
 
-export function formatEur(amount: number, locale: string): string {
-  return new Intl.NumberFormat(locale, {
-    style: "currency",
-    currency: "EUR",
-  }).format(amount);
-}
+// Design price format: EN "€7.00" · FR "7,00 €" · AR "€7.00" (Latin digits)
+export { formatPrice as formatEur } from "./weights";

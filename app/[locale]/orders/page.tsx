@@ -3,9 +3,18 @@
 import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { supabase } from "@/lib/supabase/client";
-import { formatEur } from "@/lib/pricing";
+import { formatPrice } from "@/lib/weights";
 import type { Order } from "@/types";
 import type { Locale } from "@/i18n/routing";
+
+const STATUS_STYLE: Record<string, string> = {
+  pending_payment: "bg-[var(--accent-soft)] text-[var(--accent-ink-2)]",
+  paid: "bg-[var(--success-soft)] text-[var(--success)]",
+  processing: "bg-[var(--surface-2)] text-[var(--chip-ink)]",
+  shipped: "bg-[var(--surface-2)] text-[var(--chip-ink)]",
+  completed: "bg-[var(--success-soft)] text-[var(--success)]",
+  cancelled: "bg-[#F8E4E2] text-[var(--error)]",
+};
 
 export default function OrdersPage() {
   const locale = useLocale() as Locale;
@@ -25,30 +34,39 @@ export default function OrdersPage() {
   }, []);
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-6">
-      <h1 className="mb-6 text-2xl font-bold">{t("title")}</h1>
+    <div className="mx-auto max-w-2xl px-5 py-7">
+      <h1 className="m-0 mb-6 text-[27px] font-extrabold text-[var(--ink)]">
+        {t("title")}
+      </h1>
 
       {loaded && orders.length === 0 && (
-        <p className="text-[var(--ink-600)]">{t("empty")}</p>
+        <p className="text-[var(--muted)]">{t("empty")}</p>
       )}
 
-      <ul className="space-y-4">
+      <ul className="m-0 list-none space-y-4 p-0">
         {orders.map((o) => (
-          <li key={o.id} className="rounded border border-[var(--border)] p-4">
+          <li
+            key={o.id}
+            className="rounded-[20px] border border-[var(--border)] bg-white p-5 shadow-[var(--shadow-card)]"
+          >
             <div className="flex items-center justify-between">
-              <span className="font-mono text-sm">
+              <span className="font-mono text-sm text-[var(--muted)]">
                 {o.id.slice(0, 8).toUpperCase()}
               </span>
-              <span className="rounded bg-[var(--surface)] px-2 py-1 text-sm">
+              <span
+                className={`badge ${STATUS_STYLE[o.status] ?? "bg-[var(--surface-2)]"}`}
+              >
                 {t(`status.${o.status}`)}
               </span>
             </div>
-            <p className="mt-2 text-sm text-[var(--ink-600)]">
-              {new Date(o.created_at).toLocaleDateString(locale)} —{" "}
-              {formatEur(o.total_eur, locale)}
+            <p className="m-0 mt-2 text-sm text-[var(--muted)]">
+              {new Date(o.created_at).toLocaleDateString(locale)} ·{" "}
+              <span className="font-display text-base font-extrabold text-[var(--primary)]">
+                {formatPrice(o.total_eur, locale)}
+              </span>
             </p>
             {o.status === "pending_payment" && o.bank_transfer_reference && (
-              <p className="mt-1 font-mono text-sm">
+              <p className="m-0 mt-1 font-mono text-sm text-[var(--body)]">
                 Ref: {o.bank_transfer_reference}
               </p>
             )}

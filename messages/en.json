@@ -1,6 +1,8 @@
 {
   "common": {
-    "brand": "Fruicroc",
+    "brand": "Fruit Croquant",
+    "brandFirst": "Fruit",
+    "brandSecond": "Croquant",
     "loading": "Loading…",
     "error": "Something went wrong",
     "save": "Save",
@@ -11,24 +13,77 @@
     "close": "Close",
     "currency": "€"
   },
+  "announcement": {
+    "default": "Free delivery in France from €30 · Free across Europe from €100 — with a little gift inside 🎁"
+  },
   "nav": {
     "home": "Home",
+    "shop": "Shop",
+    "fruits": "Fruits",
+    "vegetables": "Vegetables",
+    "candy": "Candy",
+    "story": "Our story",
     "about": "About us",
     "orders": "My orders",
     "login": "Sign in",
     "logout": "Sign out",
     "language": "Language"
   },
+  "hero": {
+    "badgeFreezeDried": "FREEZE-DRIED",
+    "badgeNatural": "100% NATURAL",
+    "titleStart": "Real fruit,",
+    "titleAccent": "impossibly crunchy.",
+    "subtitle": "Strawberries, mango, passion fruit and more — freeze-dried in France by Jana, keeping all the taste and vitamins of fresh fruit. Nothing added, ever.",
+    "ctaShop": "Shop the fruits",
+    "ctaStory": "Meet Jana →",
+    "trustHalal": "100% Halal",
+    "trustShipping": "Ships to 10 EU countries",
+    "trustPayment": "PayPal & bank transfer",
+    "sticker": "croc croc !",
+    "heroCardName": "Blackberries · 50 g"
+  },
   "home": {
-    "title": "Crunchy fruits — natural and delicious",
-    "allCategories": "All categories",
+    "categoriesTitle": "Pick your crunch",
+    "categoriesSub": "One price for every fruit — 30 g from {price}",
+    "favouritesTitle": "This week's favourites",
+    "seeAll": "See all products →",
     "noProducts": "No products available right now",
     "outOfStock": "Out of stock",
-    "addToCart": "Add to cart"
+    "from": "from",
+    "photoComing": "PHOTO COMING",
+    "addedToCart": "Added to cart — {name} · {weight} g"
+  },
+  "story": {
+    "label": "OUR STORY",
+    "quote": "\"It started at home, for me and my daughter.\"",
+    "body": "In Lebanon, Jana grew up snacking on crunchy fruit — but in France she couldn't find them anywhere. So she learned to freeze-dry them herself. Many trials, a lot of patience, and one little brand later: Fruit Croquant. A story of passion, perseverance and a love of healthy snacks.",
+    "cta": "Read Jana's letter",
+    "photoPlaceholder": "Photo of Jana at the market stand",
+    "sticker": "fait avec amour ♥"
+  },
+  "newsletter": {
+    "title": "A little crunch in your inbox",
+    "sub": "New fruits, restocks and market dates — once a month, no more.",
+    "placeholder": "Your email address",
+    "button": "Subscribe"
   },
   "product": {
-    "ingredients": "Ingredients",
-    "priceInclVat": "incl. VAT",
+    "badgeHalal": "100% HALAL",
+    "badgeNoSugar": "NO ADDED SUGAR",
+    "badgeNew": "NEW",
+    "badgeBestseller": "BESTSELLER",
+    "badgeLocalPickup": "🏠 LOCAL PICKUP ONLY",
+    "chooseSize": "Choose your size",
+    "perBag": "30 g ≈ a full punnet of fresh fruit",
+    "addToCart": "Add to cart",
+    "added": "Added ✓",
+    "shippingLine": "Free delivery in France from €30 · Europe from €100 🎁",
+    "specIngredients": "Ingredients",
+    "specShelfLife": "Shelf life",
+    "specShelfLifeValue": "12+ months sealed",
+    "specShipping": "Shipping",
+    "specShippingValue": "France + 10 EU countries",
     "quantity": "Quantity"
   },
   "cart": {
@@ -59,6 +114,10 @@
     "bankTransfer": "Bank transfer",
     "bankTransferDesc": "Your order will be confirmed once the transfer is received",
     "placeOrder": "Place order",
+    "promoPlaceholder": "Promo code",
+    "promoApply": "Apply",
+    "promoInvalid": "Invalid or expired code",
+    "promoMin": "Minimum order of {min} € required for this code",
     "notes": "Notes (optional)",
     "loginRequired": "Please sign in to place an order"
   },
@@ -101,6 +160,18 @@
     ],
     "signature": "Jana .K"
   },
+  "footer": {
+    "tagline": "Freeze-dried fruits made with love in France. 100% Halal · no added sugar · no additives.",
+    "shop": "Shop",
+    "help": "Help",
+    "helpShipping": "Shipping & delivery",
+    "helpPayment": "Payment methods",
+    "helpContact": "Contact / WhatsApp",
+    "legal": "Legal",
+    "securePayment": "Secure payment",
+    "bankChip": "IBAN transfer",
+    "rights": "All rights reserved"
+  },
   "legal": {
     "mentions": "Legal notice",
     "cgv": "Terms and conditions of sale",
@@ -109,12 +180,10 @@
     "placeholder": "Content being drafted — will be provided before launch."
   },
   "cookies": {
-    "message": "We use cookies to improve your experience. You can accept or reject non-essential cookies.",
-    "accept": "Accept all",
-    "reject": "Reject",
-    "policy": "Privacy policy"
-  },
-  "footer": {
-    "rights": "All rights reserved"
+    "title": "A cookie with your fruit?",
+    "message": "We use a few cookies to keep your cart safe and understand what you love. Nothing sneaky —",
+    "policyLink": "read our policy",
+    "essentials": "Only essentials",
+    "accept": "Accept all"
   }
 }

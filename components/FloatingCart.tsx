@@ -4,7 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { useCartStore } from "@/store/cartStore";
 import { localized } from "@/types";
-import { formatEur } from "@/lib/pricing";
+import { formatPrice } from "@/lib/weights";
 import type { Locale } from "@/i18n/routing";
 
 export default function FloatingCart() {
@@ -23,42 +23,60 @@ export default function FloatingCart() {
   return (
     <aside
       aria-label={t("title")}
-      className="fixed top-0 bottom-0 end-0 z-40 w-80 max-w-full overflow-y-auto border-s border-[var(--border)] bg-[var(--bg)] p-4 shadow-lg"
+      className="fixed top-0 bottom-0 end-0 z-40 flex w-[340px] max-w-full flex-col overflow-y-auto border-s border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow-float)]"
     >
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-lg font-bold">{t("title")}</h2>
-        <button type="button" onClick={toggleCart} aria-label="Close">
+        <h2 className="font-display m-0 text-xl font-extrabold text-[var(--ink)]">
+          {t("title")}
+        </h2>
+        <button
+          type="button"
+          onClick={toggleCart}
+          aria-label="Close"
+          className="grid h-11 w-11 cursor-pointer place-items-center rounded-full bg-white text-[var(--body)] shadow-[0_1px_3px_rgba(58,36,32,.12)]"
+        >
           ✕
         </button>
       </div>
 
       {items.length === 0 ? (
-        <p className="text-[var(--ink-600)]">{t("empty")}</p>
+        <p className="text-[var(--muted)]">{t("empty")}</p>
       ) : (
         <>
-          <ul className="space-y-3">
+          <ul className="m-0 list-none space-y-3 p-0">
             {items.map((item) => (
               <li
                 key={item.cartItemId}
-                className="flex items-center justify-between gap-2 border-b border-[var(--border)] pb-2"
+                className="flex items-center justify-between gap-2 rounded-2xl border border-[var(--border)] bg-white p-3"
               >
                 <div>
-                  <p>{localized(item.name, locale)}</p>
-                  <p className="text-sm text-[var(--ink-600)]">
-                    {formatEur(item.price_excl_vat, locale)}
+                  <p className="font-display m-0 text-[15px] font-bold text-[var(--ink)]">
+                    {localized(item.name, locale)}
+                  </p>
+                  <p className="m-0 text-[12.5px] text-[var(--muted)]">
+                    {item.weightG} g ·{" "}
+                    <span className="font-semibold text-[var(--primary)]">
+                      {formatPrice(item.price_excl_vat, locale)}
+                    </span>
                   </p>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1.5">
                   <button
                     type="button"
+                    aria-label="−"
                     onClick={() => updateQuantity(item.cartItemId, item.quantity - 1)}
+                    className="grid h-8 w-8 cursor-pointer place-items-center rounded-full bg-[var(--surface-2)] font-bold text-[var(--body)]"
                   >
                     −
                   </button>
-                  <span>{item.quantity}</span>
+                  <span className="min-w-5 text-center font-semibold">
+                    {item.quantity}
+                  </span>
                   <button
                     type="button"
+                    aria-label="+"
                     onClick={() => updateQuantity(item.cartItemId, item.quantity + 1)}
+                    className="grid h-8 w-8 cursor-pointer place-items-center rounded-full bg-[var(--surface-2)] font-bold text-[var(--body)]"
                   >
                     +
                   </button>
@@ -66,7 +84,7 @@ export default function FloatingCart() {
                     type="button"
                     onClick={() => removeFromCart(item.cartItemId)}
                     aria-label={t("remove")}
-                    className="text-[var(--danger)]"
+                    className="ms-1 cursor-pointer text-[var(--error)]"
                   >
                     🗑
                   </button>
@@ -75,15 +93,17 @@ export default function FloatingCart() {
             ))}
           </ul>
 
-          <p className="mt-4 flex justify-between font-semibold">
+          <p className="mt-4 flex justify-between font-semibold text-[var(--ink)]">
             <span>{t("subtotal")}</span>
-            <span>{formatEur(subtotal, locale)}</span>
+            <span className="font-display text-lg font-extrabold text-[var(--primary)]">
+              {formatPrice(subtotal, locale)}
+            </span>
           </p>
 
           <Link
             href="/checkout"
             onClick={toggleCart}
-            className="mt-4 block rounded bg-[var(--accent)] px-4 py-2 text-center text-white"
+            className="btn-primary mt-4 w-full text-[17px] no-underline"
           >
             {t("checkout")}
           </Link>
