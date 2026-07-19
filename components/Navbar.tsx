@@ -69,27 +69,59 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile side drawer */}
       {open && (
-        <nav className="flex flex-col gap-1 border-t border-[var(--border)] px-4 py-3 lg:hidden">
-          {NAV_LINKS.map((l) => (
-            <Link
-              key={l.key}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              className="rounded-xl px-3 py-2.5 font-medium text-[var(--body)] no-underline hover:bg-[var(--surface-2)]"
-            >
-              {t(l.key)}
-            </Link>
-          ))}
-          <Link
-            href="/orders"
+        <div className="fixed inset-0 z-50 lg:hidden">
+          {/* Overlay */}
+          <button
+            type="button"
+            aria-label="Close menu"
             onClick={() => setOpen(false)}
-            className="rounded-xl px-3 py-2.5 font-medium text-[var(--body)] no-underline hover:bg-[var(--surface-2)]"
-          >
-            {t("orders")}
-          </Link>
-        </nav>
+            className="absolute inset-0 w-full cursor-pointer border-0 bg-[rgba(58,36,32,.45)]"
+          />
+          {/* Drawer */}
+          <nav className="absolute top-0 bottom-0 start-0 flex w-[290px] max-w-[85%] flex-col gap-1 overflow-y-auto bg-[var(--surface)] p-5 shadow-[var(--shadow-float)]">
+            <div className="mb-3 flex items-center gap-2.5">
+              <Image
+                src="/logo.png"
+                alt=""
+                width={40}
+                height={40}
+                className="h-10 w-10 rounded-full"
+              />
+              <span className="font-display text-[17px] font-extrabold text-[var(--primary)]">
+                {tc("brandFirst")}{" "}
+                <span className="text-[#E8A50C]">{tc("brandSecond")}</span>
+              </span>
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                aria-label="Close"
+                className="ms-auto grid h-10 w-10 cursor-pointer place-items-center rounded-full bg-white text-[var(--body)] shadow-[0_1px_3px_rgba(58,36,32,.12)]"
+              >
+                ✕
+              </button>
+            </div>
+            {NAV_LINKS.map((l) => (
+              <Link
+                key={l.key}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="rounded-2xl px-4 py-3 text-[15px] font-semibold text-[var(--body)] no-underline hover:bg-[var(--surface-2)]"
+              >
+                {t(l.key)}
+              </Link>
+            ))}
+            <hr className="my-2 border-[var(--border)]" />
+            <Link
+              href="/orders"
+              onClick={() => setOpen(false)}
+              className="rounded-2xl px-4 py-3 text-[15px] font-semibold text-[var(--body)] no-underline hover:bg-[var(--surface-2)]"
+            >
+              {t("orders")}
+            </Link>
+          </nav>
+        </div>
       )}
     </header>
   );

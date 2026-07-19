@@ -38,7 +38,8 @@ export default function AdminShippingTab() {
     new Intl.DisplayNames(["en"], { type: "region" }).of(code) ?? code;
 
   return (
-    <table className="w-full text-sm">
+    <div className="overflow-x-auto rounded-2xl border border-[var(--border)] bg-white">
+    <table className="w-full min-w-[560px] text-sm">
       <thead>
         <tr className="border-b border-[var(--border)] text-start">
           <th className="p-2 text-start">Country</th>
@@ -104,5 +105,6 @@ export default function AdminShippingTab() {
         ))}
       </tbody>
     </table>
+    </div>
   );
 }

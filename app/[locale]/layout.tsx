@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
@@ -29,6 +29,13 @@ import "../globals.css";
 export const metadata: Metadata = {
   title: "Fruit Croquant",
   description: "Real fruit, impossibly crunchy — freeze-dried in France",
+};
+
+// Explicit viewport — without a top-level root layout Next does not always
+// inject the default, and mobile then renders the desktop layout zoomed out.
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export function generateStaticParams() {

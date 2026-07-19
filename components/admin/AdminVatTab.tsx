@@ -29,7 +29,8 @@ export default function AdminVatTab() {
     new Intl.DisplayNames(["en"], { type: "region" }).of(code) ?? code;
 
   return (
-    <table className="w-full text-sm">
+    <div className="overflow-x-auto rounded-2xl border border-[var(--border)] bg-white">
+    <table className="w-full min-w-[480px] text-sm">
       <thead>
         <tr className="border-b border-[var(--border)]">
           <th className="p-2 text-start">Country</th>
@@ -78,5 +79,6 @@ export default function AdminVatTab() {
         ))}
       </tbody>
     </table>
+    </div>
   );
 }
