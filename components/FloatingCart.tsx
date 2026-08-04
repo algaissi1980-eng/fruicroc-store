@@ -16,7 +16,7 @@ export default function FloatingCart() {
   if (!_hasHydrated || !isOpen) return null;
 
   const subtotal = items.reduce(
-    (sum, i) => sum + i.price_excl_vat * i.quantity,
+    (sum, i) => sum + i.unit_price_eur * i.quantity,
     0
   );
 
@@ -56,7 +56,7 @@ export default function FloatingCart() {
                   <p className="m-0 text-[12.5px] text-[var(--muted)]">
                     {item.weightG} g ·{" "}
                     <span className="font-semibold text-[var(--primary)]">
-                      {formatPrice(item.price_excl_vat, locale)}
+                      {formatPrice(item.unit_price_eur, locale)}
                     </span>
                   </p>
                 </div>

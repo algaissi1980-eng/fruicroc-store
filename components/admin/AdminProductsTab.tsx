@@ -109,7 +109,7 @@ export default function AdminProductsTab() {
       description: form.description,
       ingredients: form.ingredients,
       slug,
-      price_excl_vat: 4.5, // brand-wide weight tiers drive pricing (lib/weights.ts)
+      base_price_eur: 4.5, // unused — brand-wide weight tiers drive pricing (lib/weights.ts)
       vat_category: form.vat_category,
       category: form.category,
       stock: form.stock,

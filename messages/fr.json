@@ -14,7 +14,7 @@
     "currency": "€"
   },
   "announcement": {
-    "default": "Livraison gratuite en France dès 30 € · Gratuite en Europe dès 100 € — avec un petit cadeau 🎁"
+    "default": "Livraison en point relais Mondial Relay — 6 € en France · 9 € en Europe · offerte dès 100 € 🎁"
   },
   "nav": {
     "home": "Accueil",
@@ -78,7 +78,7 @@
     "perBag": "30 g ≈ une barquette de fruits frais",
     "addToCart": "Ajouter au panier",
     "added": "Ajouté ✓",
-    "shippingLine": "Livraison gratuite en France dès 30 € · Europe dès 100 € 🎁",
+    "shippingLine": "Livraison en point relais — 6 € France · 9 € Europe · offerte dès 100 € 🎁",
     "specIngredients": "Ingrédients",
     "specShelfLife": "Conservation",
     "specShelfLifeValue": "12 mois et plus scellé",
@@ -105,8 +105,9 @@
     "postalCode": "Code postal",
     "country": "Pays",
     "selectCountry": "Choisir un pays",
+    "pickupNote": "Livraison en point relais Mondial Relay : votre commande est déposée au point le plus proche de votre adresse.",
     "shipping": "Livraison",
-    "vat": "TVA ({rate}%)",
+    "vat": "dont TVA ({rate}%)",
     "total": "Total",
     "payment": "Moyen de paiement",
     "paypal": "PayPal",
@@ -118,6 +119,8 @@
     "promoApply": "Appliquer",
     "promoInvalid": "Code invalide ou expiré",
     "promoMin": "Commande minimum de {min} € requise pour ce code",
+    "offerLabel": "Offre en cours",
+    "freeGift": "Offert",
     "notes": "Remarques (optionnel)",
     "loginRequired": "Veuillez vous connecter pour commander"
   },

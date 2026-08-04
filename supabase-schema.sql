@@ -108,10 +108,13 @@ INSERT INTO store_settings (id) VALUES (1) ON CONFLICT (id) DO NOTHING;
 INSERT INTO admins (email) VALUES ('algaissi1980@gmail.com')
 ON CONFLICT (email) DO NOTHING;
 
--- Shipping zones: placeholder rates — client to confirm from admin
-INSERT INTO shipping_zones (country_code, rate_eur) VALUES
-  ('FR', 5.90), ('DE', 8.90), ('IT', 9.90), ('ES', 9.90), ('NL', 8.90),
-  ('BE', 7.90), ('PL', 10.90), ('PT', 10.90), ('LU', 7.90), ('AT', 9.90)
+-- Shipping (client, 2026-07-19): Mondial Relay pickup points —
+-- France 6€ · rest of EU 9€ · free over 100€
+INSERT INTO shipping_zones (country_code, rate_eur, free_shipping_threshold_eur) VALUES
+  ('FR', 6.00, 100.00), ('DE', 9.00, 100.00), ('IT', 9.00, 100.00),
+  ('ES', 9.00, 100.00), ('NL', 9.00, 100.00), ('BE', 9.00, 100.00),
+  ('PL', 9.00, 100.00), ('PT', 9.00, 100.00), ('LU', 9.00, 100.00),
+  ('AT', 9.00, 100.00)
 ON CONFLICT (country_code) DO NOTHING;
 
 -- VAT: reduced (food) + standard rates as of 2026 — VERIFY before launch, editable in admin

@@ -4,7 +4,6 @@ import { useState } from "react";
 import AdminProductsTab from "@/components/admin/AdminProductsTab";
 import AdminOrdersTab from "@/components/admin/AdminOrdersTab";
 import AdminShippingTab from "@/components/admin/AdminShippingTab";
-import AdminVatTab from "@/components/admin/AdminVatTab";
 import AdminSettingsTab from "@/components/admin/AdminSettingsTab";
 import AdminPromoTab from "@/components/admin/AdminPromoTab";
 import AdminOffersTab from "@/components/admin/AdminOffersTab";
@@ -19,7 +18,6 @@ const TABS = [
   { id: "offers", label: "Offers" },
   { id: "promo", label: "Promo codes" },
   { id: "shipping", label: "Shipping zones" },
-  { id: "vat", label: "VAT rates" },
   { id: "stats", label: "Stats" },
   { id: "admins", label: "Admins" },
   { id: "settings", label: "Settings" },
@@ -59,7 +57,6 @@ export default function AdminPage() {
       {tab === "offers" && <AdminOffersTab />}
       {tab === "promo" && <AdminPromoTab />}
       {tab === "shipping" && <AdminShippingTab />}
-      {tab === "vat" && <AdminVatTab />}
       {tab === "stats" && <AdminStatsTab />}
       {tab === "admins" && <AdminAdminsTab />}
       {tab === "settings" && <AdminSettingsTab />}

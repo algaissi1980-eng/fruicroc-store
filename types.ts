@@ -27,8 +27,8 @@ export interface Product {
   name: LocalizedString;
   description: LocalizedString;
   ingredients?: LocalizedString | null;
-  price_excl_vat: number; // EUR, net
-  original_price_excl_vat?: number | null;
+  base_price_eur: number; // unused — brand-wide weight tiers drive pricing
+  original_price_eur?: number | null;
   vat_category: VatCategory;
   image_url?: string | null;
   images?: string[];
@@ -82,7 +82,7 @@ export interface Order {
   shipping_postal_code: string;
   shipping_country: CountryCode;
   shipping_cost_eur: number;
-  subtotal_excl_vat_eur: number;
+  subtotal_eur: number; // gross (VAT included)
   vat_rate_percent: number;
   vat_amount_eur: number;
   total_eur: number;
@@ -106,7 +106,7 @@ export interface OrderItem {
   order_id: string;
   product_id: string;
   quantity: number;
-  price_excl_vat: number; // snapshot at order time
+  unit_price_eur: number; // gross unit price snapshot at order time
   products?: { name: LocalizedString; image_url?: string };
 }
 
@@ -116,7 +116,7 @@ export interface CartItem {
   cartItemId: string; // `${productId}-${weightG}`
   name: LocalizedString;
   weightG: 30 | 50 | 70 | 100;
-  price_excl_vat: number; // tier price snapshot
+  unit_price_eur: number; // gross tier price snapshot (TTC)
   vat_category: VatCategory;
   quantity: number;
   image_url?: string;

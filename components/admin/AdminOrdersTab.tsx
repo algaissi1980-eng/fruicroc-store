@@ -191,7 +191,7 @@ export default function AdminOrdersTab() {
                             </span>
                           </span>
                           <span className="text-sm font-bold text-[var(--body)]">
-                            €{(item.price_excl_vat * item.quantity).toFixed(2)}
+                            €{(item.unit_price_eur * item.quantity).toFixed(2)}
                           </span>
                         </li>
                       ))}
@@ -207,8 +207,8 @@ export default function AdminOrdersTab() {
                         <dt>Shipping</dt>
                         <dd className="m-0">€{Number(o.shipping_cost_eur).toFixed(2)}</dd>
                       </div>
-                      <div className="flex justify-between">
-                        <dt>VAT ({o.vat_rate_percent}%)</dt>
+                      <div className="flex justify-between text-[var(--muted)]">
+                        <dt>VAT included ({o.vat_rate_percent}%)</dt>
                         <dd className="m-0">€{Number(o.vat_amount_eur).toFixed(2)}</dd>
                       </div>
                     </dl>

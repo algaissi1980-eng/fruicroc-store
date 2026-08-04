@@ -1,19 +1,19 @@
 // =============================================
-// Pricing engine — EUR + per-country VAT
-// NOTE: price display strategy (single gross price
-// vs. destination-based) still pending client
-// decision. Totals below are destination-based.
+// Pricing engine — EUR, prices are VAT-INCLUSIVE (TTC)
+// Client decision (2026-07-19): one gross price for every country.
+// VAT is EXTRACTED from the gross amount for invoicing ("dont TVA"),
+// never added on top. Rate still depends on the destination country.
 // =============================================
 
 import type { CartItem, ShippingZone, VatRate, VatCategory, CountryCode } from "../types";
 
 export interface OrderTotals {
-  subtotalExclVat: number;
+  subtotal: number; // gross (VAT included), before discount
   discount: number;
-  vatAmount: number;
+  vatIncluded: number; // informational — VAT contained in the total
   vatRatePercent: number; // dominant rate applied (food)
-  shipping: number;
-  total: number;
+  shipping: number; // gross
+  total: number; // what the customer pays
 }
 
 const round2 = (n: number) => Math.round(n * 100) / 100;
@@ -36,13 +36,13 @@ export function getVatRate(
 export function getShippingCost(
   zones: ShippingZone[],
   country: CountryCode,
-  subtotalExclVat: number
+  grossSubtotal: number
 ): number {
   const zone = zones.find((z) => z.country_code === country && z.active);
   if (!zone) return 0;
   if (
     zone.free_shipping_threshold_eur != null &&
-    subtotalExclVat >= zone.free_shipping_threshold_eur
+    grossSubtotal >= zone.free_shipping_threshold_eur
   ) {
     return 0;
   }
@@ -56,34 +56,34 @@ export function computeTotals(
   country: CountryCode,
   discountPercent = 0
 ): OrderTotals {
-  const subtotalExclVat = round2(
-    items.reduce((sum, i) => sum + i.price_excl_vat * i.quantity, 0)
+  // Gross subtotal — tier prices are TTC
+  const subtotal = round2(
+    items.reduce((sum, i) => sum + i.unit_price_eur * i.quantity, 0)
   );
 
-  // Promo discount applied on the net subtotal, before VAT
-  const discount = round2(subtotalExclVat * (discountPercent / 100));
-  const discountFactor =
-    subtotalExclVat > 0 ? (subtotalExclVat - discount) / subtotalExclVat : 1;
+  const discount = round2(subtotal * (discountPercent / 100));
+  const discountFactor = subtotal > 0 ? (subtotal - discount) / subtotal : 1;
 
-  // VAT per item category (freeze-dried fruit → usually reduced "food" rate)
-  let vatAmount = 0;
+  // VAT contained in the discounted gross amount: gross × r / (100 + r)
+  let vatIncluded = 0;
   for (const item of items) {
     const rate = getVatRate(rates, country, item.vat_category);
-    vatAmount +=
-      item.price_excl_vat * item.quantity * discountFactor * (rate / 100);
+    const grossShare = item.unit_price_eur * item.quantity * discountFactor;
+    vatIncluded += grossShare * (rate / (100 + rate));
   }
-  vatAmount = round2(vatAmount);
+  vatIncluded = round2(vatIncluded);
 
-  const shipping = getShippingCost(zones, country, subtotalExclVat - discount);
+  const shipping = getShippingCost(zones, country, subtotal - discount);
   const vatRatePercent = getVatRate(rates, country, "food");
 
   return {
-    subtotalExclVat,
+    subtotal,
     discount,
-    vatAmount,
+    vatIncluded,
     vatRatePercent,
     shipping,
-    total: round2(subtotalExclVat - discount + vatAmount + shipping),
+    // VAT is already inside the prices — nothing added
+    total: round2(subtotal - discount + shipping),
   };
 }
 

@@ -2,7 +2,9 @@
 
 Tout le reste du site est prêt. Ces points bloquent la mise en ligne.
 
-## 1. Décision de prix (bloquant pour le moteur de prix)
+## 1. ~~Décision de prix~~ ✅ Résolu (19/07) : prix TTC uniques pour tous les pays (option A)
+
+## 1bis. Décision de prix (référence)
 La TVA sur les produits alimentaires varie selon le pays de livraison (France 5,5 %, Allemagne 7 %, Italie 4 %…). Deux options :
 - **Option A — prix unique TTC partout** (ex. 50 g = 7,00 € pour tous les pays) : plus simple pour le client, la marge varie légèrement selon le pays.
 - **Option B — prix TTC selon le pays** : le total change selon la destination.
@@ -33,6 +35,6 @@ La TVA sur les produits alimentaires varie selon le pays de livraison (France 5,
 
 ## 7. Vérifications avant lancement
 - Confirmer les taux de TVA par pays (pré-remplis, modifiables dans l'admin).
-- Confirmer les tarifs de livraison par pays (pré-remplis à titre indicatif, modifiables dans l'admin).
+- ~~Confirmer les tarifs de livraison~~ ✅ Fait (19/07) : point relais Mondial Relay — 6 € France · 9 € Europe · offert dès 100 €.
 - Nom de domaine (ex. fruicroc.fr) — à acheter, nous gérons la connexion.
 - Adresse e-mail d'expédition (les liens de connexion utilisent pour l'instant le service limité de Supabase — un service pro type Resend sera branché avant le lancement).

@@ -14,7 +14,7 @@
     "currency": "€"
   },
   "announcement": {
-    "default": "Free delivery in France from €30 · Free across Europe from €100 — with a little gift inside 🎁"
+    "default": "Mondial Relay pickup-point delivery — €6 France · €9 Europe · free over €100 🎁"
   },
   "nav": {
     "home": "Home",
@@ -78,7 +78,7 @@
     "perBag": "30 g ≈ a full punnet of fresh fruit",
     "addToCart": "Add to cart",
     "added": "Added ✓",
-    "shippingLine": "Free delivery in France from €30 · Europe from €100 🎁",
+    "shippingLine": "Pickup-point delivery — €6 France · €9 Europe · free over €100 🎁",
     "specIngredients": "Ingredients",
     "specShelfLife": "Shelf life",
     "specShelfLifeValue": "12+ months sealed",
@@ -105,8 +105,9 @@
     "postalCode": "Postal code",
     "country": "Country",
     "selectCountry": "Select a country",
+    "pickupNote": "Mondial Relay pickup-point delivery: your order is dropped at the point closest to your address.",
     "shipping": "Shipping",
-    "vat": "VAT ({rate}%)",
+    "vat": "VAT included ({rate}%)",
     "total": "Total",
     "payment": "Payment method",
     "paypal": "PayPal",
@@ -118,6 +119,8 @@
     "promoApply": "Apply",
     "promoInvalid": "Invalid or expired code",
     "promoMin": "Minimum order of {min} € required for this code",
+    "offerLabel": "Current offer",
+    "freeGift": "Free",
     "notes": "Notes (optional)",
     "loginRequired": "Please sign in to place an order"
   },

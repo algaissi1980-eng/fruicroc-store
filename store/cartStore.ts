@@ -34,7 +34,7 @@ export const useCartStore = create<CartStore>()(
                 cartItemId,
                 name: product.name,
                 weightG,
-                price_excl_vat: tierPrice(weightG as WeightG),
+                unit_price_eur: tierPrice(weightG as WeightG),
                 vat_category: product.vat_category,
                 quantity,
                 image_url: product.image_url ?? undefined,

@@ -98,16 +98,16 @@ export default function HomeClient({
           </div>
         </div>
 
-        {/* Desktop hero image — circular photo in white ring */}
-        <div className="relative hidden justify-self-center lg:block">
-          <div className="h-[430px] w-[430px] rounded-full bg-white p-3 shadow-[var(--shadow-ring)]">
+        {/* Desktop hero image — large rounded square in a white frame */}
+        <div className="relative hidden w-full lg:block">
+          <div className="h-[600px] w-full rounded-[36px] bg-white p-3 shadow-[var(--shadow-ring)]">
             <Image
               src={heroImg}
               alt=""
-              width={430}
-              height={430}
+              width={700}
+              height={600}
               priority
-              className="h-full w-full rounded-full object-cover"
+              className="h-full w-full rounded-[26px] object-cover"
             />
           </div>
           <span className="font-display absolute top-[18px] -end-2 rotate-[8deg] rounded-full bg-[var(--accent)] px-[18px] py-3 text-base font-extrabold text-[var(--accent-ink)] shadow-[0_4px_10px_rgba(58,36,32,.15)]">
@@ -143,7 +143,7 @@ export default function HomeClient({
               key={c.key}
               type="button"
               onClick={() => setCategory(category === c.key ? null : c.key)}
-              className={`relative h-[110px] flex-1 cursor-pointer overflow-hidden rounded-2xl border-0 p-0 text-start lg:h-[210px] lg:rounded-[20px] ${
+              className={`relative h-[110px] flex-1 cursor-pointer overflow-hidden rounded-2xl border-0 p-0 text-start lg:aspect-square lg:h-auto lg:rounded-[20px] ${
                 category === c.key ? "ring-4 ring-[var(--primary)]" : ""
               }`}
               style={c.img ? undefined : { background: "var(--accent)" }}

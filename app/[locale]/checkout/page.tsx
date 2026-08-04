@@ -11,10 +11,21 @@ import { formatPrice } from "@/lib/weights";
 import { localized } from "@/types";
 import type {
   CountryCode,
+  LocalizedString,
   PaymentMethod,
   ShippingZone,
   VatRate,
 } from "@/types";
+
+interface ActiveOffer {
+  id: string;
+  type: "sale_percent" | "free_item";
+  discount_percentage: number | null;
+  product_id: string | null;
+  product_name: LocalizedString | null;
+  free_item_count: number | null;
+  min_order_amount: number | null;
+}
 import type { Locale } from "@/i18n/routing";
 
 const inputCls =
@@ -23,12 +34,14 @@ const inputCls =
 export default function CheckoutPage() {
   const locale = useLocale() as Locale;
   const t = useTranslations("checkout");
+  const tCart = useTranslations("cart");
   const tCommon = useTranslations("common");
   const router = useRouter();
   const { items, clearCart, _hasHydrated } = useCartStore();
 
   const [zones, setZones] = useState<ShippingZone[]>([]);
   const [rates, setRates] = useState<VatRate[]>([]);
+  const [offers, setOffers] = useState<ActiveOffer[]>([]);
   const [userId, setUserId] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -52,19 +65,46 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     (async () => {
-      const [{ data: z }, { data: r }, { data: auth }] = await Promise.all([
-        supabase.from("shipping_zones").select("*").eq("active", true),
-        supabase.from("vat_rates").select("*"),
-        supabase.auth.getUser(),
-      ]);
+      const [{ data: z }, { data: r }, { data: o }, { data: auth }] =
+        await Promise.all([
+          supabase.from("shipping_zones").select("*").eq("active", true),
+          supabase.from("vat_rates").select("*"),
+          supabase.rpc("get_active_offers"),
+          supabase.auth.getUser(),
+        ]);
       setZones((z as ShippingZone[]) ?? []);
       setRates((r as VatRate[]) ?? []);
+      setOffers((o as ActiveOffer[]) ?? []);
       setUserId(auth.user?.id ?? null);
       if (auth.user?.email) {
         setForm((f) => ({ ...f, email: f.email || auth.user!.email! }));
       }
     })();
   }, []);
+
+  // Active offers applied automatically once the subtotal reaches the minimum
+  const grossSubtotal = items.reduce(
+    (sum, i) => sum + i.unit_price_eur * i.quantity,
+    0
+  );
+  const saleOffer =
+    offers.find(
+      (o) =>
+        o.type === "sale_percent" &&
+        grossSubtotal >= (o.min_order_amount ?? 0) &&
+        (o.discount_percentage ?? 0) > 0
+    ) ?? null;
+  const freeOffer =
+    offers.find(
+      (o) =>
+        o.type === "free_item" &&
+        o.product_id &&
+        grossSubtotal >= (o.min_order_amount ?? 0)
+    ) ?? null;
+
+  const offerPercent = saleOffer?.discount_percentage ?? 0;
+  const promoPercent = promo?.discount ?? 0;
+  const totalDiscountPercent = Math.min(100, offerPercent + promoPercent);
 
   const totals = useMemo(
     () =>
@@ -74,17 +114,17 @@ export default function CheckoutPage() {
             zones,
             rates,
             form.country as CountryCode,
-            promo?.discount ?? 0
+            totalDiscountPercent
           )
         : null,
-    [items, zones, rates, form.country, promo]
+    [items, zones, rates, form.country, totalDiscountPercent]
   );
 
   const applyPromo = async () => {
     const code = promoInput.trim().toUpperCase();
     if (!code) return;
     const subtotal = items.reduce(
-      (sum, i) => sum + i.price_excl_vat * i.quantity,
+      (sum, i) => sum + i.unit_price_eur * i.quantity,
       0
     );
     const { data, error } = await supabase.rpc("validate_promo_code", {
@@ -134,11 +174,11 @@ export default function CheckoutPage() {
           shipping_postal_code: form.postalCode,
           shipping_country: form.country,
           shipping_cost_eur: totals.shipping,
-          subtotal_excl_vat_eur: totals.subtotalExclVat,
+          subtotal_eur: totals.subtotal,
           promo_code: promo?.code ?? null,
           discount_eur: totals.discount,
           vat_rate_percent: totals.vatRatePercent,
-          vat_amount_eur: totals.vatAmount,
+          vat_amount_eur: totals.vatIncluded, // VAT included, not added
           total_eur: totals.total,
           status: "pending_payment",
           payment_method: paymentMethod,
@@ -151,16 +191,32 @@ export default function CheckoutPage() {
       if (error) throw error;
       orderId = order.id;
 
-      // 2. Order items (price + weight snapshot)
-      const { error: itemsError } = await supabase.from("order_items").insert(
-        items.map((i) => ({
+      // 2. Order items (price + weight snapshot) + free-item offer at €0
+      const orderItems: {
+        order_id: string;
+        product_id: string;
+        weight_g: number | null;
+        quantity: number;
+        unit_price_eur: number;
+      }[] = items.map((i) => ({
+        order_id: order.id,
+        product_id: i.id,
+        weight_g: i.weightG,
+        quantity: i.quantity,
+        unit_price_eur: i.unit_price_eur,
+      }));
+      if (freeOffer?.product_id) {
+        orderItems.push({
           order_id: order.id,
-          product_id: i.id,
-          weight_g: i.weightG,
-          quantity: i.quantity,
-          price_excl_vat: i.price_excl_vat,
-        }))
-      );
+          product_id: freeOffer.product_id,
+          weight_g: null,
+          quantity: freeOffer.free_item_count ?? 1,
+          unit_price_eur: 0, // gift 🎁
+        });
+      }
+      const { error: itemsError } = await supabase
+        .from("order_items")
+        .insert(orderItems);
       if (itemsError) throw itemsError;
 
       // 3. Reserve stock atomically — LAST, so a failure can roll back the order
@@ -230,6 +286,9 @@ export default function CheckoutPage() {
               </option>
             ))}
           </select>
+          <p className="m-0 rounded-xl bg-[var(--surface)] p-3 text-[13px] leading-relaxed text-[var(--muted)]">
+            📦 {t("pickupNote")}
+          </p>
         </fieldset>
 
         <fieldset className="m-0 flex flex-col gap-2.5 rounded-[20px] border border-[var(--border)] bg-white p-5">
@@ -291,22 +350,62 @@ export default function CheckoutPage() {
 
         {totals && (
           <dl className="m-0 flex flex-col gap-1.5 rounded-[20px] border border-[var(--border)] bg-white p-5">
-            {totals.discount > 0 && promo && (
+            {/* Line items — so the total is never a mystery */}
+            {items.map((i) => (
+              <div
+                key={i.cartItemId}
+                className="flex justify-between gap-3 text-[14px] text-[var(--body)]"
+              >
+                <dt className="min-w-0 truncate">
+                  {i.quantity} × {localized(i.name, locale)}{" "}
+                  <span className="text-[var(--muted)]">· {i.weightG} g</span>
+                </dt>
+                <dd className="m-0 shrink-0">
+                  {formatPrice(i.unit_price_eur * i.quantity, locale)}
+                </dd>
+              </div>
+            ))}
+            {/* Free-item offer — visible so the gift is never a surprise */}
+            {freeOffer && (
+              <div className="flex justify-between gap-3 text-[14px] text-[var(--success)]">
+                <dt>
+                  🎁 {freeOffer.free_item_count ?? 1} ×{" "}
+                  {localized(freeOffer.product_name, locale)}
+                </dt>
+                <dd className="m-0 font-semibold">{t("freeGift")}</dd>
+              </div>
+            )}
+            <div className="flex justify-between border-t border-[var(--border)] pt-2 font-semibold text-[var(--body)]">
+              <dt>{tCart("subtotal")}</dt>
+              <dd className="m-0">{formatPrice(totals.subtotal, locale)}</dd>
+            </div>
+            {/* Automatic sale offer */}
+            {saleOffer && offerPercent > 0 && (
               <div className="flex justify-between text-[var(--success)]">
                 <dt>
-                  {promo.code} (−{promo.discount}%)
+                  {t("offerLabel")} (−{offerPercent}%)
                 </dt>
-                <dd className="m-0">−{formatPrice(totals.discount, locale)}</dd>
+                <dd className="m-0">
+                  −{formatPrice((totals.subtotal * offerPercent) / 100, locale)}
+                </dd>
+              </div>
+            )}
+            {promo && promoPercent > 0 && (
+              <div className="flex justify-between text-[var(--success)]">
+                <dt>
+                  {promo.code} (−{promoPercent}%)
+                </dt>
+                <dd className="m-0">
+                  −{formatPrice((totals.subtotal * promoPercent) / 100, locale)}
+                </dd>
               </div>
             )}
             <div className="flex justify-between text-[var(--body)]">
               <dt>{t("shipping")}</dt>
               <dd className="m-0">{formatPrice(totals.shipping, locale)}</dd>
             </div>
-            <div className="flex justify-between text-[var(--body)]">
-              <dt>{t("vat", { rate: totals.vatRatePercent })}</dt>
-              <dd className="m-0">{formatPrice(totals.vatAmount, locale)}</dd>
-            </div>
+            {/* VAT is inside the prices — stored on the order for invoicing,
+                intentionally NOT shown at checkout (Mo, 2026-07-19) */}
             <div className="mt-1 flex justify-between border-t border-[var(--border)] pt-2 font-bold text-[var(--ink)]">
               <dt>{t("total")}</dt>
               <dd className="font-display m-0 text-xl font-extrabold text-[var(--primary)]">
@@ -325,13 +424,6 @@ export default function CheckoutPage() {
         </button>
       </form>
 
-      <ul className="mt-8 list-none space-y-1 p-0 text-sm text-[var(--muted)]">
-        {items.map((i) => (
-          <li key={i.cartItemId}>
-            {i.quantity} × {localized(i.name, locale)} · {i.weightG} g
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }

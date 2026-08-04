@@ -8,6 +8,8 @@
 export const WEIGHT_TIERS = [30, 50, 70, 100] as const;
 export type WeightG = (typeof WEIGHT_TIERS)[number];
 
+// Prices are VAT-INCLUSIVE (TTC), identical in all countries
+// (client decision 2026-07-19). VAT is extracted, never added on top.
 export const TIER_PRICES: Record<WeightG, number> = {
   30: 4.5,
   50: 7.0,
