@@ -103,7 +103,7 @@ CREATE TABLE page_views (
 -- Seed data
 -- =============================================
 
-INSERT INTO store_settings (id) VALUES (1) ON CONFLICT (id) DO NOTHING;
+INSERT INTO store_settings (id, bank_account_holder, bank_iban, bank_bic) VALUES (1, 'Fruicroc', 'FR7616598000014000129836313', 'FPELFR21XXX') ON CONFLICT (id) DO NOTHING;
 
 INSERT INTO admins (email) VALUES ('algaissi1980@gmail.com')
 ON CONFLICT (email) DO NOTHING;
